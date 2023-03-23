@@ -1,4 +1,5 @@
 <!doctype html>
+<meta charset="UTF-8">
 <title>{% block title %}{% endblock %} - Flaskr</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -8,29 +9,39 @@
     <div class="full-body-container">
         <div class="top-text">
             <div class="google-colors">
-                <h1 id="plant_color">Plants</h1>
-                <h1 id="pal_color">Pals</h1>
-                <!-- <h1 id="google-4">4</h1>
-                <h1 id="google-3">3</h1>
-                <h1 id="google-0-1">0</h1>
-                <h1 id="google-0-2">0</h1> -->
+                <h1 id="plant_color">Plant</h1>
+                <h1 id="pal_color">Pals🪴</h1>
             </div>
-            <div class="input-box" onclick="sendFocus()">
-                <img src="{{ url_for('static', filename='images/mag.png') }}" />
-                <input placeholder="Search to find your Perfect Plant Pal!" id="filter-text-val" onkeyup="filterText()">
+            <h3 id="catch_phrase"><i>“Everyone deserves a plant”</i></h3>
+            <div class="search">
+                <div class="input-box" onclick="sendFocus()">
+                    <img src="{{ url_for('static', filename='images/mag.png') }}" />
+                    <input placeholder="Describe your Perfect Plant Pal!" id="filter-text-val" onkeyup="filterText()">
+                </div> 
+                <div class="options">
+                    <div class="option">
+                        Light
+                        <div class="slidecontainer">
+                            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                        </div>
+                    </div>
+                    <div class="option">
+                        Water
+                        <div class="slidecontainer">
+                            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                        </div>
+                    </div>
+                    <div class="option">
+                        Environment
+                        <select name="Environment" id="dropdown">
+                            <option value="default"selected disabled hidden>Select Option</option>
+                            <option value="rural">rural</option>
+                            <option value="suburb">suburb</option>
+                            <option value="city">city</option>
+                        </select>
+                    </div>
+                </div> 
             </div>
-            Environment
-            <select name="Environment" id="env">
-                <option value="rural">rural</option>
-                <option value="suburb">suburb</option>
-                <option value="city">city</option>
-              </select>
-              Light<div class="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-              </div>
-              Water<div class="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-              </div>
         </div>
         <div id="answer-box">
 
