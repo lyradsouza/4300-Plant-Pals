@@ -13,29 +13,24 @@
     background-color: #bef8dc43;
 }
 
-#plant_color{
-    color:#4285F4;
-}
-
-/* #google-s{
-    color:#DB4437;
-}
-
-#google-4{
-    color:	#F4B400;
-}
-
-#google-3{
-    color:	#4285F4;
-} */
-
 #pal_color{
-    color:	#0F9D58;
+    color: #98cbda;
 }
 
-/* #google-0-2{
-    color:#DB4437;
-} */
+#plant_color{
+    color:	#6ebd8f;
+}
+
+#catch_phrase{
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-family: 'Open Sans', sans-serif;
+    color: #9dc195;
+    margin-top: 0;
+    line-height: 0px;
+    letter-spacing: 5px
+}
 
 .google-colors{
     display: flex;
@@ -58,6 +53,33 @@
     padding:12px;
     width: 600px;
     background-color: white;
+    align-content: stretch;
+}
+
+.search{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: stretch;
+    width: 100vw;
+}
+
+.options{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    width: 75vw;
+    margin-top: 7px;
+}
+
+.option{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 25vw;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .input-box img{
@@ -69,6 +91,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100vw;
 }
 
 .input-box input{
@@ -91,3 +114,12 @@
 .episode-desc{
     font-family: 'Montserrat', sans-serif;
 }
+
+/* #drop_down{
+    padding:10px
+}
+
+#slidecontainer{
+    padding:10px !;
+    margin:1000px!;
+} */
