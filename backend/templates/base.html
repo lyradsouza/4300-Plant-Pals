@@ -51,7 +51,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <div id="answer-box">
 
@@ -81,10 +80,15 @@
 
 
 
-        function answerBoxTemplate(title, titleDesc) {
+        function answerBoxTemplate(title, Flowering, Light, Temperature, Humidity, Watering, Soil_Mix) {
             return `<div class=''>
                 <h3 class='episode-title'>${title}</h3>
-                <p class='episode-desc'>${titleDesc}</p>
+                <p class='episode-desc'>${Flowering}</p>
+                <p class='episode-desc'>${Light}</p>
+                <p class='episode-desc'>${Temperature}</p>
+                <p class='episode-desc'>${Humidity}</p>
+                <p class='episode-desc'>${Watering}</p>
+                <p class='episode-desc'>${Soil_Mix}</p>
             </div>`
         }
 
@@ -100,7 +104,7 @@
                 .then((data) => data.forEach(row => {
 
                     let tempDiv = document.createElement("div")
-                    tempDiv.innerHTML = answerBoxTemplate(row.title, row.descr)
+                    tempDiv.innerHTML = answerBoxTemplate(row.Botanical_Name, row.Flowering, row.Light, row.Temperature, row.Humidity, row.Watering, row.Soil_Mix)
                     document.getElementById("answer-box").appendChild(tempDiv)
                 }));
 

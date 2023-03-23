@@ -12,9 +12,9 @@ os.environ['ROOT_PATH'] = os.path.abspath(os.path.join("..",os.curdir))
 # Don't worry about the deployment credentials, those are fixed
 # You can use a different DB name if you want to
 MYSQL_USER = "root"
-MYSQL_USER_PASSWORD = "MyR00tT!me"
+MYSQL_USER_PASSWORD = ""
 MYSQL_PORT = 3306
-MYSQL_DATABASE = "kardashiandb"
+MYSQL_DATABASE = "plantsdb"
 
 mysql_engine = MySQLDatabaseHandler(MYSQL_USER,MYSQL_USER_PASSWORD,MYSQL_PORT,MYSQL_DATABASE)
 
@@ -27,9 +27,9 @@ CORS(app)
 # Sample search, the LIKE operator in this case is hard-coded, 
 # but if you decide to use SQLAlchemy ORM framework, 
 # there's a much better and cleaner way to do this
-def sql_search(episode):
-    query_sql = f"""SELECT * FROM episodes WHERE LOWER( title ) LIKE '%%{episode.lower()}%%' limit 10"""
-    keys = ["id","title","descr"]
+def sql_search(plant):
+    query_sql = f"""SELECT * FROM plants WHERE LOWER( Botanical_Name ) LIKE '%%{plant.lower()}%%' limit 10"""
+    keys = ["Botanical_Name","Common_Name","Flowering", "Light", "Temperature", "Humidity", "Watering", "Soil_Mix"]
     data = mysql_engine.query_selector(query_sql)
     return json.dumps([dict(zip(keys,i)) for i in data])
 
@@ -40,6 +40,7 @@ def home():
 @app.route("/episodes")
 def episodes_search():
     text = request.args.get("title")
+    print(sql_search(text))
     return sql_search(text)
 
 app.run(debug=True)
