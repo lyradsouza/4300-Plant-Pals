@@ -10,13 +10,14 @@
     justify-content: start;
     align-items: center;
     flex-direction: column;
+    background-color: #bef8dc43;
 }
 
-#google-c{
+#plant_color{
     color:#4285F4;
 }
 
-#google-s{
+/* #google-s{
     color:#DB4437;
 }
 
@@ -26,15 +27,15 @@
 
 #google-3{
     color:	#4285F4;
-}
+} */
 
-#google-0-1{
+#pal_color{
     color:	#0F9D58;
 }
 
-#google-0-2{
+/* #google-0-2{
     color:#DB4437;
-}
+} */
 
 .google-colors{
     display: flex;
@@ -56,6 +57,7 @@
     margin-top: 10px;
     padding:12px;
     width: 600px;
+    background-color: white;
 }
 
 .input-box img{
