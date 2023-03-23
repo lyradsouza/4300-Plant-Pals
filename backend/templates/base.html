@@ -20,35 +20,36 @@
                 <div class="input-box" onclick="sendFocus()">
                     <img src="{{ url_for('static', filename='images/mag.png') }}" />
                     <input placeholder="Describe your Perfect Plant Pal!" id="filter-text-val" onkeyup="filterText()">
-                </div> 
-                
+                </div>
+
                 <div class="options">
                     <div class="option">
                         Light
                         <div class="slidecontainer">
-                            <input type="range" min="1" max="100" value="50" class="slider" id="light_slider" onchange="updateTextInputL(this.value);>
+                            <input type="range" min="1" max="100" value="50" class="slider" id="light_slider"
+                                onchange="updateLightInput(this.value);">
                             <output id="light-output">50</output>
                         </div>
-                        
+
                     </div>
                     <div class="option">
                         Water
                         <div class="slidecontainer">
-                            <input type="range" min="1" max="100" value="50" class="slider" class="slider"
-                    onchange="updateTextInputW(this.value);">
+                            <input type="range" min="1" max="100" value="50" class="slider" id="water_slider"
+                                onchange="updateWaterInput(this.value);">
                             <output id="water-output">50</output>
                         </div>
                     </div>
                     <div class="option">
                         Environment
                         <select name="Environment" id="env" onchange="updateEnvInputL();">
-                            <option value="default"selected disabled hidden>Select Option</option>
+                            <option value="default" selected disabled hidden>Select Option</option>
                             <option value="rural">rural</option>
                             <option value="suburb">suburb</option>
                             <option value="city">city</option>
                         </select>
                     </div>
-                </div> 
+                </div>
             </div>
 
         </div>
@@ -68,11 +69,11 @@
             console.log(env_val)
         }
 
-        function updateTextInputL(val) {
+        function updateLightInput(val) {
             document.getElementgitById('light-output').value = val;
             light_slider_val = val;
         }
-        function updateTextInputW(val) {
+        function updateWaterInput(val) {
             document.getElementById('water-output').value = val;
             water_slider_val = val;
         }
