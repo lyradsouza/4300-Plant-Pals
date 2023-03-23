@@ -40,6 +40,7 @@ def home():
 @app.route("/episodes")
 def episodes_search():
     text = request.args.get("title")
+    print(sql_search(text))
     return sql_search(text)
 
 app.run(debug=True)
