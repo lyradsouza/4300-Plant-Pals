@@ -1,36 +1,57 @@
 <!doctype html>
+<meta charset="UTF-8">
 <title>{% block title %}{% endblock %} - Flaskr</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kanit&family=Montserrat&family=Open+Sans:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kanit&family=Montserrat&family=Open+Sans:wght@500&display=swap"
+    rel="stylesheet">
+
 <body>
     <div class="full-body-container">
         <div class="top-text">
             <div class="google-colors">
-                <h1 id="plant_color">Plants</h1>
+                <h1 id="plant_color">Plant</h1>
                 <h1 id="pal_color">Pals</h1>
-                <!-- <h1 id="google-4">4</h1>
-                <h1 id="google-3">3</h1>
-                <h1 id="google-0-1">0</h1>
-                <h1 id="google-0-2">0</h1> -->
+                <h1>🪴</h1>
             </div>
-            <div class="input-box" onclick="sendFocus()">
-                <img src="{{ url_for('static', filename='images/mag.png') }}" />
-                <input placeholder="Search to find your Perfect Plant Pal!" id="filter-text-val" onkeyup="filterText()">
+            <h3 id="catch_phrase"><i>“Everyone deserves a plant”</i></h3>
+            <div class="search">
+                <div class="input-box" onclick="sendFocus()">
+                    <img src="{{ url_for('static', filename='images/mag.png') }}" />
+                    <input placeholder="Describe your Perfect Plant Pal!" id="filter-text-val" onkeyup="filterText()">
+                </div>
+
+                <div class="options">
+                    <div class="option">
+                        Light
+                        <div class="slidecontainer">
+                            <input type="range" min="1" max="100" value="50" class="slider" id="light_slider"
+                                onchange="updateLightInput(this.value);">
+                            <output id="light-output">50</output>
+                        </div>
+
+                    </div>
+                    <div class="option">
+                        Water
+                        <div class="slidecontainer">
+                            <input type="range" min="1" max="100" value="50" class="slider" id="water_slider"
+                                onchange="updateWaterInput(this.value);">
+                            <output id="water-output">50</output>
+                        </div>
+                    </div>
+                    <div class="option">
+                        Environment
+                        <select name="Environment" id="env" onchange="updateEnvInputL();">
+                            <option value="default">Select Option</option>
+                            <option value="rural">rural</option>
+                            <option value="suburb">suburb</option>
+                            <option value="city">city</option>
+                        </select>
+                    </div>
+                </div>
             </div>
-            Environment
-            <select name="Environment" id="env">
-                <option value="rural">rural</option>
-                <option value="suburb">suburb</option>
-                <option value="city">city</option>
-              </select>
-              Light<div class="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-              </div>
-              Water<div class="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-              </div>
+
         </div>
         <div id="answer-box">
 
@@ -39,30 +60,51 @@
 
     <script>
 
-        function answerBoxTemplate(title,titleDesc){
+        var env_val = document.getElementById("env").value;
+        var light_slider_val = document.getElementById("light_slider").value;
+        var water_slider_val = document.getElementById("water_slider").value;
+
+        function updateEnvInputL() {
+            env_val = document.getElementById("env").value;
+            console.log(env_val)
+        }
+
+        function updateLightInput(val) {
+            document.getElementById('light-output').value = val;
+            light_slider_val = val;
+        }
+        function updateWaterInput(val) {
+            document.getElementById('water-output').value = val;
+            water_slider_val = val;
+        }
+
+
+
+
+        function answerBoxTemplate(title, titleDesc) {
             return `<div class=''>
                 <h3 class='episode-title'>${title}</h3>
                 <p class='episode-desc'>${titleDesc}</p>
             </div>`
         }
 
-        function sendFocus(){
+        function sendFocus() {
             document.getElementById('filter-text-val').focus()
         }
 
-        function filterText(){
+        function filterText() {
             document.getElementById("answer-box").innerHTML = ""
             console.log(document.getElementById("filter-text-val").value)
             fetch("/episodes?" + new URLSearchParams({ title: document.getElementById("filter-text-val").value }).toString())
-            .then((response) => response.json())
-            .then((data) => data.forEach(row => {
-                
-                let tempDiv = document.createElement("div")
-                tempDiv.innerHTML = answerBoxTemplate(row.title,row.descr)
-                document.getElementById("answer-box").appendChild(tempDiv)
-            }));
+                .then((response) => response.json())
+                .then((data) => data.forEach(row => {
+
+                    let tempDiv = document.createElement("div")
+                    tempDiv.innerHTML = answerBoxTemplate(row.title, row.descr)
+                    document.getElementById("answer-box").appendChild(tempDiv)
+                }));
 
         }
-            
+
     </script>
 </body>
