@@ -28,8 +28,8 @@ CORS(app)
 # but if you decide to use SQLAlchemy ORM framework, 
 # there's a much better and cleaner way to do this
 def sql_search(plant):
-    query_sql = f"""SELECT * FROM plants WHERE LOWER( botanical_name ) LIKE '%%{plant.lower()}%%' limit 10"""
-    keys = ["botanical_name","common_name","flowering", "light", "temperature", "humidity", "watering", "soil_mix", ]
+    query_sql = f"""SELECT * FROM plants WHERE LOWER( Botanical_Name ) LIKE '%%{plant.lower()}%%' limit 10"""
+    keys = ["Botanical_Name","Common_Name","Flowering", "Light", "Temperature", "Humidity", "Watering", "Soil_Mix"]
     data = mysql_engine.query_selector(query_sql)
     print([dict(zip(keys,i)) for i in data])
     return json.dumps([dict(zip(keys,i)) for i in data])
