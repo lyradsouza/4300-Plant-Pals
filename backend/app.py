@@ -43,4 +43,4 @@ def episodes_search():
     print(sql_search(text))
     return sql_search(text)
 
-app.run(debug=True)
+#app.run(debug=True)
