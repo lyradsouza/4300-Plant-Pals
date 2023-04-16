@@ -22,6 +22,34 @@
                     <input placeholder="Describe your Perfect Plant Pal!" id="filter-text-val" onkeyup="filterText()">
                 </div>
 
+                <div class="options">
+                    <div class="option">
+                        Light
+                        <div class="slidecontainer">
+                            <input type="range" min="1" max="100" value="50" class="slider" id="light_slider"
+                                onchange="updateLightInput(this.value);">
+                            <output id="light-output">50</output>
+                        </div>
+
+                    </div>
+                    <div class="option">
+                        Water
+                        <div class="slidecontainer">
+                            <input type="range" min="1" max="100" value="50" class="slider" id="water_slider"
+                                onchange="updateWaterInput(this.value);">
+                            <output id="water-output">50</output>
+                        </div>
+                    </div>
+                    <div class="option">
+                        Environment
+                        <select name="Environment" id="env" onchange="updateEnvInputL();">
+                            <option value="default">Select Option</option>
+                            <option value="rural">rural</option>
+                            <option value="suburb">suburb</option>
+                            <option value="city">city</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="answer-box">
@@ -30,6 +58,26 @@
     </div>
 
     <script>
+
+        var env_val = document.getElementById("env").value;
+        var light_slider_val = document.getElementById("light_slider").value;
+        var water_slider_val = document.getElementById("water_slider").value;
+
+        function updateEnvInputL() {
+            env_val = document.getElementById("env").value;
+            console.log(env_val)
+        }
+
+        function updateLightInput(val) {
+            document.getElementById('light-output').value = val;
+            light_slider_val = val;
+        }
+        function updateWaterInput(val) {
+            document.getElementById('water-output').value = val;
+            water_slider_val = val;
+        }
+
+
 
 
         function answerBoxTemplate(title, Flowering, Light, Temperature, Humidity, Watering, Soil_Mix) {
