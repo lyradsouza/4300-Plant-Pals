@@ -63,13 +63,11 @@ def plants_search():
     query = request.args.get("description")
     common_names, descriptions = common_desc_lists()
     id_list = range(len(descriptions))
-    # ranked_plants = jaccard_similarity(id_list, descriptions, query)
-    ranked_plants = create_ranked_list(query, descriptions, id_list)
-    print(query)
-    print(ranked_plants)
+    ranked_plants = jaccard_similarity(id_list, descriptions, query)
+    # ranked_plants = create_ranked_list(query, descriptions, id_list)
     ranked = []
-    if (ranked_plants == id_list):
-        ranked = []
+    if (ranked_plants == [*range(len(descriptions))]):
+        return [{'commonName': "No Results Found :(", 'description': ""}]
     else:
         for i in ranked_plants:
             ranked.append({'commonName': common_names[i], 'description': descriptions[i]})
