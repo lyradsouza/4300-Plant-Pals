@@ -18,6 +18,7 @@ def jaccard_similarity(plant_ids, descriptions, query):
     
 
   id_sim_dict = dict(zip(plant_ids, sim_measures))
-  ranked = sorted(id_sim_dict.items(), key=lambda x:x[1], reverse=True)
-
-  return [x[0] for x in ranked]
+  #ranked = sorted(id_sim_dict.items(), key=lambda x:x[1], reverse=True)
+  #[x[0] for x in ranked]
+  
+  return id_sim_dict

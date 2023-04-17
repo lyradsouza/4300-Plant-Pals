@@ -4,7 +4,8 @@ from flask import Flask, render_template, request
 from flask_cors import CORS
 from helpers.MySQLDatabaseHandler import MySQLDatabaseHandler
 from jaccardsim import jaccard_similarity
-from cosine import create_ranked_list
+from cosine_sim import cosine_similarity
+from collections import Counter
 
 # ROOT_PATH for linking with all your files. 
 # Feel free to use a config.py or settings.py with a global export variable
@@ -63,10 +64,23 @@ def plants_search():
     query = request.args.get("description")
     common_names, descriptions = common_desc_lists()
     id_list = range(len(descriptions))
-    ranked_plants = jaccard_similarity(id_list, descriptions, query)
-    # ranked_plants = create_ranked_list(query, descriptions, id_list)
+
+    # ranked_plants = jaccard_similarity(id_list, descriptions, query)
+    ranked_plants = cosine_similarity(query, descriptions, id_list)
+    #print(query)
+    #print(ranked_plants)
+    jacc_ranked_plants = jaccard_similarity(id_list, descriptions, query)
+    cos_ranked_plants = cosine_similarity(query, descriptions, id_list)
+    #print(jacc_ranked_plants)
+    #print(cos_ranked_plants)
+    id_sim_dict = Counter(jacc_ranked_plants) + Counter(cos_ranked_plants)
+
+    
+    ranked = sorted(id_sim_dict.items(), key=lambda x:x[1], reverse=True)
+    ranked_plants = [x[0] for x in ranked]
+
     ranked = []
-    if (ranked_plants == [*range(len(descriptions))]):
+    if (ranked_plants == []):
         return [{'commonName': "No Results Found :(", 'description': ""}]
     else:
         for i in ranked_plants:
