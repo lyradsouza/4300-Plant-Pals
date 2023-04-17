@@ -1,27 +1,30 @@
-.full-body-container{
+body {
+    background-color: #bef8dc43;
+}
+
+.full-body-container {
     position: absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    width:100%;
-    height:100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: start;
     align-items: center;
     flex-direction: column;
-    background-color: #bef8dc43;
 }
 
-#pal_color{
+#pal_color {
     color: #98cbda;
 }
 
-#plant_color{
-    color:	#6ebd8f;
+#plant_color {
+    color: #6ebd8f;
 }
 
-#catch_phrase{
+#catch_phrase {
     display: flex;
     align-items: center;
     font-size: 24px;
@@ -32,31 +35,31 @@
     letter-spacing: 5px
 }
 
-.google-colors{
+.google-colors {
     display: flex;
     align-items: center;
     font-size: 48px;
     font-family: 'Open Sans', sans-serif;
 }
 
-.google-colors h1{
+.google-colors h1 {
     margin-bottom: 0;
     margin-right: 3px;
 }
 
-.input-box{
+.input-box {
     border-radius: 50px;
-    border:1px solid black;
+    border: 1px solid black;
     display: flex;
     align-items: center;
     margin-top: 10px;
-    padding:12px;
+    padding: 12px;
     width: 600px;
     background-color: white;
     align-content: stretch;
 }
 
-.search{
+.search {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -64,7 +67,7 @@
     width: 100vw;
 }
 
-.options{
+.options {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -75,7 +78,7 @@
 
 }
 
-.option{
+.option {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -83,19 +86,19 @@
     font-family: 'Open Sans', sans-serif;
 }
 
-.input-box img{
+.input-box img {
     height: 20px;
-    width:20px;
+    width: 20px;
 }
 
-.top-text{
+.top-text {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100vw;
 }
 
-.input-box input{
+.input-box input {
     width: 100%;
     margin-left: 10px;
     font-size: 16px;
@@ -103,16 +106,16 @@
     outline: 0;
 }
 
-#answer-box{
+#answer-box {
     width: 700px;
-    margin-top:50px; 
+    margin-top: 50px;
 }
 
-.episode-title{
+.episode-title {
     font-family: 'Kanit', sans-serif;
 }
 
-.episode-desc{
+.episode-desc {
     font-family: 'Montserrat', sans-serif;
 }
 
