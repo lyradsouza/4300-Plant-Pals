@@ -11,7 +11,11 @@ def jaccard_similarity(plant_ids, descriptions, query):
     descrip_tokens = set(re.findall(r'[A-Za-z]+',descrip.lower())) 
     numerator = len(query_tokens.intersection(descrip_tokens)) #and
     denominator = len(query_tokens.union(descrip_tokens)) #or
-    sim_measures.append(numerator/denominator)
+    if denominator == 0:
+      sim_measures.append(0)
+    else:
+      sim_measures.append(numerator/denominator)
+    
 
   id_sim_dict = dict(zip(plant_ids, sim_measures))
   ranked = sorted(id_sim_dict.items(), key=lambda x:x[1], reverse=True)

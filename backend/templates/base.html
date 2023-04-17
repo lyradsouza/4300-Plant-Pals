@@ -92,19 +92,40 @@
             </div>`
         }
 
+        function descriptionBoxTemplate(commonName, description) {
+            return `<div class=''>
+                <h3 class='episode-title'>${commonName}</h3>
+                <p class='episode-desc'>${description}</p>
+            </div>`
+        }
+
         function sendFocus() {
             document.getElementById('filter-text-val').focus()
         }
 
+        // function filterText() {
+        //     document.getElementById("answer-box").innerHTML = ""
+        //     console.log(document.getElementById("filter-text-val").value)
+        //     fetch("/episodes?" + new URLSearchParams({ title: document.getElementById("filter-text-val").value }).toString())
+        //         .then((response) => response.json())
+        //         .then((data) => data.forEach(row => {
+
+        //             let tempDiv = document.createElement("div")
+        //             tempDiv.innerHTML = answerBoxTemplate(row.Botanical_Name, row.Flowering, row.Light, row.Temperature, row.Humidity, row.Watering, row.Soil_Mix)
+        //             document.getElementById("answer-box").appendChild(tempDiv)
+        //         }));
+
+        // }
+
         function filterText() {
             document.getElementById("answer-box").innerHTML = ""
             console.log(document.getElementById("filter-text-val").value)
-            fetch("/episodes?" + new URLSearchParams({ title: document.getElementById("filter-text-val").value }).toString())
+            fetch("/plants?" + new URLSearchParams({ description: document.getElementById("filter-text-val").value }).toString())
                 .then((response) => response.json())
                 .then((data) => data.forEach(row => {
 
                     let tempDiv = document.createElement("div")
-                    tempDiv.innerHTML = answerBoxTemplate(row.Botanical_Name, row.Flowering, row.Light, row.Temperature, row.Humidity, row.Watering, row.Soil_Mix)
+                    tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description)
                     document.getElementById("answer-box").appendChild(tempDiv)
                 }));
 
