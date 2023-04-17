@@ -19,7 +19,7 @@
             <div class="search">
                 <div class="input-box" onclick="sendFocus()">
                     <img src="{{ url_for('static', filename='images/mag.png') }}" />
-                    <input placeholder="Describe your Perfect Plant Pal!" id="filter-text-val" onkeyup="filterText()">
+                    <input placeholder="Describe your Perfect Plant Pal!" id="filter-text-val">
                 </div>
 
                 <div class="options">
@@ -51,7 +51,8 @@
                 </div>
             </div>
         </div>
-        <a href="{{ url_for('static', filename='results.html') }}">Ready to meet your perfect plant?!</a>
+        <button type="button" href="{{ url_for('static', filename='results.html') }}" onclick="filterText()">Ready to
+            meet your perfect plant?!</button>
         <div id="answer-box">
 
         </div>
@@ -117,19 +118,31 @@
 
         // }
 
+        // function filterText() {
+        //     document.getElementById("answer-box").innerHTML = ""
+        //     console.log(document.getElementById("filter-text-val").value)
+        //     fetch("/plants?" + new URLSearchParams({ description: document.getElementById("filter-text-val").value }).toString())
+        //         .then((response) => response.json())
+        //         .then((data) => data.forEach(row => {
+
+        //             let tempDiv = document.createElement("div")
+        //             tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description)
+        //             document.getElementById("answer-box").appendChild(tempDiv)
+        //         }));
+
+        // }
+
         function filterText() {
             document.getElementById("answer-box").innerHTML = ""
-            console.log(document.getElementById("filter-text-val").value)
             fetch("/plants?" + new URLSearchParams({ description: document.getElementById("filter-text-val").value }).toString())
                 .then((response) => response.json())
                 .then((data) => data.forEach(row => {
-
                     let tempDiv = document.createElement("div")
                     tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description)
                     document.getElementById("answer-box").appendChild(tempDiv)
                 }));
-
         }
+
 
     </script>
 </body>
