@@ -13,7 +13,7 @@ os.environ['ROOT_PATH'] = os.path.abspath(os.path.join("..",os.curdir))
 # Don't worry about the deployment credentials, those are fixed
 # You can use a different DB name if you want to
 MYSQL_USER = "root"
-MYSQL_USER_PASSWORD = "MayankRao16Cornell.edu"
+MYSQL_USER_PASSWORD = "MyR00tT!me"
 MYSQL_PORT = 3306
 MYSQL_DATABASE = "plantsdb"
 
@@ -50,6 +50,11 @@ def common_desc_lists():
 @app.route("/")
 def home():
     return render_template('base.html',title="sample html")
+@app.route("/results/")
+def results():
+    return render_template('results.html',title="results html")
+if __name__ == '__main__':
+    app.run(debug=True)
 
 @app.route("/episodes")
 def episodes_search():
