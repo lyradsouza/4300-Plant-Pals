@@ -46,7 +46,7 @@ def common_desc_lists():
     common_list = []
     for val in dict_data:
         common_list.append(val['Common_Name'])
-        desc_list.append(val['Plant_Description'])
+        desc_list.append(val['Plant_Description'] + " Also known as " + val['Botanical_Name']+".")
     return common_list, desc_list
 
 @app.route("/")
@@ -87,4 +87,4 @@ def plants_search():
             ranked.append({'commonName': common_names[i], 'description': descriptions[i]})
     return ranked
 
-# app.run(debug=True)
+app.run(debug=True)
