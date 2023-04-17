@@ -66,12 +66,13 @@
 
 .options{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
 
     width: 75vw;
-    margin-top: 7px;
+    margin: 20px;
+
 }
 
 .option{
@@ -113,6 +114,16 @@
 
 .episode-desc{
     font-family: 'Montserrat', sans-serif;
+}
+
+a {
+    background-color: #6ebd8f;
+    padding: 10px;
+    outline: 2px solid black;
+    border-radius: 10px;
+    color: black;
+    text-decoration: none;
+
 }
 
 /* #drop_down{
