@@ -1,4 +1,5 @@
 <!doctype html>
+<html>
 <meta charset="UTF-8">
 <title>Plant Pal!</title>
 <link rel="icon" href="https://em-content.zobj.net/thumbs/320/apple/271/potted-plant_1fab4.png">
@@ -20,7 +21,7 @@
             <h3 id="catch_phrase"><i>“Everyone deserves a plant”</i></h3>
             <div class="search">
                 <div class="input-box" onclick="sendFocus()">
-                    <img src="{{ url_for('static', filename='images/mag.png') }}" alt="magnifying glass for search" />
+                    <img src="{{ url_for('static', filename='images/mag.png') }}" />
                     <input placeholder="Describe your Perfect Plant Pal!" id="filter-text-val" onkeyup="filterText()">
                 </div>
 
@@ -28,38 +29,88 @@
                     <div class="option">
                         Light
                         <div class="slidecontainer">
-                            <input type="range" min="1" max="4" value="1" class="slider" id="light_slider"
+                            <input type="range" min="1" max="100" value="50" class="slider" id="light_slider"
                                 onchange="updateLightInput(this.value);">
-                            <output id="light-output">1</output>
+                            <output id="light-output">50</output>
                         </div>
 
                     </div>
                     <div class="option">
                         Water
                         <div class="slidecontainer">
-                            <input type="range" min="1" max="3" value="1" class="slider" id="water_slider"
+                            <input type="range" min="1" max="100" value="50" class="slider" id="water_slider"
                                 onchange="updateWaterInput(this.value);">
-                            <output id="water-output">1</output>
+                            <output id="water-output">50</output>
                         </div>
                     </div>
                     <div class="option">
-                        Temperature
-                        <div class="slidecontainer">
-                            <input type="range" min="1" max="3" value="1" class="slider" id="temp_slider"
-                                onchange="updateTempInput(this.value);">
-                            <output id="temp-output">1</output>
-                        </div>
+                        Environment
+                        <select name="Environment" id="env" onchange="updateEnvInputL();">
+                            <option value="default">Select Option</option>
+                            <option value="rural">rural</option>
+                            <option value="suburb">suburb</option>
+                            <option value="city">city</option>
+                        </select>
                     </div>
                 </div>
                 <a href="{{ url_for('static', filename='results.html') }}">Ready to meet your perfect plant?!</a>
             </div>
         </div>
         <div id="answer-box">
+
         </div>
     </div>
 
     <script>
+        //             </body>
+        // <body>
+        //     <div class="full-body-container">
+        //         <div class="top-text">
+        //             <div class="google-colors">
+        //                 <h1 id="plant_color">Plant</h1>
+        //                 <h1 id="pal_color">Pals</h1>
+        //                 <h1>🪴</h1>
+        //             </div>
+        //             <h3 id="catch_phrase"><i>“Everyone deserves a plant”</i></h3>
+        //             <div class="search">
+        //                 <div class="input-box" onclick="sendFocus()">
+        //                     <img src="{{ url_for('static', filename='images/mag.png') }}" alt="magnifying glass for search" />
+        //                     <input placeholder="Describe your Perfect Plant Pal!" id="filter-text-val" onkeyup="filterText()">
+        //                 </div>
 
+        //                 <div class="options">
+        //                     <div class="option">
+        //                         Light
+        //                         <div class="slidecontainer">
+        //                             <input type="range" min="1" max="4" value="1" class="slider" id="light_slider"
+        //                                 onchange="updateLightInput(this.value);">
+        //                             <output id="light-output">1</output>
+        //                         </div>
+
+        //                     </div>
+        //                     <div class="option">
+        //                         Water
+        //                         <div class="slidecontainer">
+        //                             <input type="range" min="1" max="3" value="1" class="slider" id="water_slider"
+        //                                 onchange="updateWaterInput(this.value);">
+        //                             <output id="water-output">1</output>
+        //                         </div>
+        //                     </div>
+        //                     <div class="option">
+        //                         Temperature
+        //                         <div class="slidecontainer">
+        //                             <input type="range" min="1" max="3" value="1" class="slider" id="temp_slider"
+        //                                 onchange="updateTempInput(this.value);">
+        //                             <output id="temp-output">1</output>
+        //                         </div>
+        //                     </div>
+        //                 </div>
+        //                 <a href="{{ url_for('static', filename='results.html') }}">Ready to meet your perfect plant?!</a>
+        //             </div>
+        //         </div>
+        //         <div id="answer-box">
+        //         </div>
+        //     </div>
         var light_slider_val = document.getElementById("light_slider").value;
         var water_slider_val = document.getElementById("water_slider").value;
         var temp_slider_val = document.getElementById("temp_slider").value;
@@ -117,7 +168,7 @@
 
         // }
 
-        var data_dict = {}
+        // var data_dict = {}
         function filterText() {
             document.getElementById("answer-box").innerHTML = ""
             fetch("/plants?" + new URLSearchParams({ description: document.getElementById("filter-text-val").value }).toString())
@@ -125,17 +176,21 @@
                 .then((data) => data.forEach(row => {
                     let tempDiv = document.createElement("div")
                     tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description)
-                    data_dict[row.commonName] = row.description
+                    // data_dict[row.commonName] = row.description
                     document.getElementById("answer-box").appendChild(tempDiv)
                 }));
-            localStorage.setItem("data", data_dict)
+            // localStorage.setItem("data", data_dict)
             //dict = localStorage.getItem("data")
+
+            // for (let name in data_dict) {
+            //     console.log(data_dict[name])
+            //     console.log(name)
+            // }
         }
 
-        for (let name in data_dict) {
-            console.log(data_dict[name])
-            console.log(name)
-        }
+
 
     </script>
 </body>
+
+</html>
