@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Kanit&family=Montserrat&family=Open+Sans:wght@500&display=swap"
     rel="stylesheet">
 
-<body>
+<body onload="filterText()">
     <div class="full-body-container">
         <div class="top-text">
             <div class="google-colors">
@@ -21,10 +21,30 @@
             <div class="search">
                 <p>Search: </p>
             </div>
-            <div class="results">
+            <div id="results">
                 <h2>Your Perfect Plant Suggestions!</h2>
-                
+
             </div>
         </div>
     </div>
+
+    <script>
+        function filterText() {
+            commonName = localStorage.getItem("plant_name")
+            description = localStorage.getItem("plant_description")
+            document.getElementById("results").innerHTML = ""
+            for (let i = 0; i < commonName.length; i++) {
+                let tempDiv = document.createElement("div")
+                tempDiv.innerHTML = descriptionBoxTemplate(commonName[i], description[i])
+                document.getElementById("results").appendChild(tempDiv)
+            }
+        }
+
+        function descriptionBoxTemplate(commonName, description) {
+            return `<div class=''>
+                <h3 class='episode-title'>${commonName}</h3>
+                <p class='episode-desc'>${description}</p>
+            </div>`
+        }
+    </script>
 </body>

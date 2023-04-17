@@ -19,40 +19,40 @@
             <div class="search">
                 <div class="input-box" onclick="sendFocus()">
                     <img src="{{ url_for('static', filename='images/mag.png') }}" />
-                    <input placeholder="Describe your Perfect Plant Pal!" id="filter-text-val" onkeyup="filterText()">
+                    <input placeholder="Describe your Perfect Plant Pal!" id="filter-text-val">
                 </div>
 
                 <div class="options">
                     <div class="option">
                         Light
                         <div class="slidecontainer">
-                            <input type="range" min="1" max="100" value="50" class="slider" id="light_slider"
+                            <input type="range" min="1" max="4" value="1" class="slider" id="light_slider"
                                 onchange="updateLightInput(this.value);">
-                            <output id="light-output">50</output>
+                            <output id="light-output">1</output>
                         </div>
 
                     </div>
                     <div class="option">
                         Water
                         <div class="slidecontainer">
-                            <input type="range" min="1" max="100" value="50" class="slider" id="water_slider"
+                            <input type="range" min="1" max="3" value="1" class="slider" id="water_slider"
                                 onchange="updateWaterInput(this.value);">
-                            <output id="water-output">50</output>
+                            <output id="water-output">1</output>
                         </div>
                     </div>
                     <div class="option">
-                        Environment
-                        <select name="Environment" id="env" onchange="updateEnvInputL();">
-                            <option value="default">Select Option</option>
-                            <option value="rural">rural</option>
-                            <option value="suburb">suburb</option>
-                            <option value="city">city</option>
-                        </select>
+                        Temperature
+                        <div class="slidecontainer">
+                            <input type="range" min="1" max="3" value="1" class="slider" id="temp_slider"
+                                onchange="updateTempInput(this.value);">
+                            <output id="temp-output">1</output>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <a href="{{ url_for('static', filename='results.html') }}">Ready to meet your perfect plant?!</a>
+        <button type="button" href="{{ url_for('static', filename='results.html') }}" onclick="filterText()">Ready to
+            meet your perfect plant?!</button>
         <div id="answer-box">
 
         </div>
@@ -94,7 +94,7 @@
         }
 
         function descriptionBoxTemplate(commonName, description) {
-            return `<div class=''>
+            return `<div class='box'>
                 <h3 class='episode-title'>${commonName}</h3>
                 <p class='episode-desc'>${description}</p>
             </div>`
@@ -118,19 +118,31 @@
 
         // }
 
+        // function filterText() {
+        //     document.getElementById("answer-box").innerHTML = ""
+        //     console.log(document.getElementById("filter-text-val").value)
+        //     fetch("/plants?" + new URLSearchParams({ description: document.getElementById("filter-text-val").value }).toString())
+        //         .then((response) => response.json())
+        //         .then((data) => data.forEach(row => {
+
+        //             let tempDiv = document.createElement("div")
+        //             tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description)
+        //             document.getElementById("answer-box").appendChild(tempDiv)
+        //         }));
+
+        // }
+
         function filterText() {
             document.getElementById("answer-box").innerHTML = ""
-            console.log(document.getElementById("filter-text-val").value)
             fetch("/plants?" + new URLSearchParams({ description: document.getElementById("filter-text-val").value }).toString())
                 .then((response) => response.json())
                 .then((data) => data.forEach(row => {
-
                     let tempDiv = document.createElement("div")
                     tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description)
                     document.getElementById("answer-box").appendChild(tempDiv)
                 }));
-
         }
+
 
     </script>
 </body>
