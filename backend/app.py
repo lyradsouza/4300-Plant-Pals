@@ -4,7 +4,7 @@ from flask import Flask, render_template, request
 from flask_cors import CORS
 from helpers.MySQLDatabaseHandler import MySQLDatabaseHandler
 from jaccardsim import jaccard_similarity
-from cosine import create_ranked_list
+from cosine_sim import cosine_similarity
 
 # ROOT_PATH for linking with all your files. 
 # Feel free to use a config.py or settings.py with a global export variable
@@ -14,7 +14,7 @@ os.environ['ROOT_PATH'] = os.path.abspath(os.path.join("..",os.curdir))
 # Don't worry about the deployment credentials, those are fixed
 # You can use a different DB name if you want to
 MYSQL_USER = "root"
-MYSQL_USER_PASSWORD = "MayankRao16Cornell.edu"
+MYSQL_USER_PASSWORD = ""
 MYSQL_PORT = 3306
 MYSQL_DATABASE = "plantsdb"
 
@@ -64,7 +64,7 @@ def plants_search():
     common_names, descriptions = common_desc_lists()
     id_list = range(len(descriptions))
     # ranked_plants = jaccard_similarity(id_list, descriptions, query)
-    ranked_plants = create_ranked_list(query, descriptions, id_list)
+    ranked_plants = cosine_similarity(query, descriptions, id_list)
     print(query)
     print(ranked_plants)
     ranked = []
