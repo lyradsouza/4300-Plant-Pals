@@ -5,6 +5,7 @@ from flask_cors import CORS
 from helpers.MySQLDatabaseHandler import MySQLDatabaseHandler
 from jaccardsim import jaccard_similarity
 from cosine_sim import cosine_similarity
+from collections import Counter
 
 # ROOT_PATH for linking with all your files. 
 # Feel free to use a config.py or settings.py with a global export variable
@@ -14,7 +15,7 @@ os.environ['ROOT_PATH'] = os.path.abspath(os.path.join("..",os.curdir))
 # Don't worry about the deployment credentials, those are fixed
 # You can use a different DB name if you want to
 MYSQL_USER = "root"
-MYSQL_USER_PASSWORD = ""
+MYSQL_USER_PASSWORD = "chocolove"
 MYSQL_PORT = 3306
 MYSQL_DATABASE = "plantsdb"
 
@@ -66,13 +67,20 @@ def plants_search():
 
     # ranked_plants = jaccard_similarity(id_list, descriptions, query)
     ranked_plants = cosine_similarity(query, descriptions, id_list)
-    print(query)
-    print(ranked_plants)
-    ranked_plants = jaccard_similarity(id_list, descriptions, query)
-    # ranked_plants = create_ranked_list(query, descriptions, id_list)
+    #print(query)
+    #print(ranked_plants)
+    jacc_ranked_plants = jaccard_similarity(id_list, descriptions, query)
+    cos_ranked_plants = cosine_similarity(query, descriptions, id_list)
+    #print(jacc_ranked_plants)
+    #print(cos_ranked_plants)
+    id_sim_dict = Counter(jacc_ranked_plants) + Counter(cos_ranked_plants)
+
+    
+    ranked = sorted(id_sim_dict.items(), key=lambda x:x[1], reverse=True)
+    ranked_plants = [x[0] for x in ranked]
 
     ranked = []
-    if (ranked_plants == [*range(len(descriptions))]):
+    if (ranked_plants == []):
         return [{'commonName': "No Results Found :(", 'description': ""}]
     else:
         for i in ranked_plants:
