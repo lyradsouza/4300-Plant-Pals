@@ -2,7 +2,8 @@
 <meta charset="UTF-8">
 <title>Plant Pal!</title>
 <link rel="icon" href="https://em-content.zobj.net/thumbs/320/apple/271/potted-plant_1fab4.png">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"> -->
+<link rel="stylesheet" href="../static/style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kanit&family=Montserrat&family=Open+Sans:wght@500&display=swap"
@@ -18,10 +19,7 @@
             </div>
             <h3 id="catch_phrase"><i>“Everyone deserves a plant”</i></h3>
             <div class="search">
-                <div class="input-box" onclick="sendFocus()">
-                    <img src ="{{ url_for('static', filename='images/mag.png') }}" alt="magnifying glass for search"/>
-                    <input placeholder="Describe your Perfect Plant Pal!" id="filter-text-val" onkeyup="filterText()">
-                </div>
+                
             </div>
         </div>
     </div>

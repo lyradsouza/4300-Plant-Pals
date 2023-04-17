@@ -2,7 +2,8 @@
 <meta charset="UTF-8">
 <title>Plant Pal!</title>
 <link rel="icon" href="https://em-content.zobj.net/thumbs/320/apple/271/potted-plant_1fab4.png">
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
+<link rel="stylesheet" href="../static/style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kanit&family=Montserrat&family=Open+Sans:wght@500&display=swap"
@@ -29,7 +30,7 @@
                         <div class="slidecontainer">
                             <input type="range" min="1" max="4" value="1" class="slider" id="light_slider"
                                 onchange="updateLightInput(this.value);">
-                            <output id="light-output">0</output>
+                            <output id="light-output">1</output>
                         </div>
 
                     </div>
@@ -38,7 +39,7 @@
                         <div class="slidecontainer">
                             <input type="range" min="1" max="3" value="1" class="slider" id="water_slider"
                                 onchange="updateWaterInput(this.value);">
-                            <output id="water-output">0</output>
+                            <output id="water-output">1</output>
                         </div>
                     </div>
                     <div class="option">
@@ -46,7 +47,7 @@
                         <div class="slidecontainer">
                             <input type="range" min="1" max="3" value="1" class="slider" id="temp_slider"
                                 onchange="updateTempInput(this.value);">
-                            <output id="temp-output">0</output>
+                            <output id="temp-output">1</output>
                         </div>
                     </div>
                 </div>
