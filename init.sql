@@ -2,6 +2,7 @@ CREATE DATABASE IF NOT EXISTS plantsdb;
 
 USE plantsdb;
 DROP TABLE IF EXISTS plants;
+DROP TABLE IF EXISTS plantDescriptions;
 
 CREATE TABLE plants (
     Botanical_Name varchar(512),
@@ -245,9 +246,6 @@ INSERT INTO plants VALUE ("Aphelandra squarrosa","Zebra Plant","","High-light ar
 INSERT INTO plants VALUE ("Billbergia zebrina","Zebra Plant","","High light areas with over 200 ftc, but not direct sun or medium light areas with 75 ftc to 200 ftc","Average: 65F night, 75F day temperatures","Average, 25 percent to 49 percent","surface of soil mix should dry before rewatering","Any mix must be well aerated and drained. 2 parts peat moss, 1 part perlite, 1 part fir bark OR 1 part peat, 1 part pine bark OR 1 part peat, 1 part pine bark, 1 part cypress shavings. Add 2 ounces of dolomitic limestone to 4 gallons (half bushel) of soil mix and a minor element mix. Dissolve 1 ounce of 10-10-10 water-soluble fertilizer in 3 gallons of water. Use this solution after repotting and again monthly when watering. Also, add enough water to fill the vase formed by the overlapping leaf bases.");
 INSERT INTO plants VALUE ("Cryptanthus zonatus","Zebra Plant","","High-light areas with over 200 ftc, but not direct sun","Average: 65F night, 75F day temperatures","Average, 25 percent to 49 percent","surface of soil mix should dry before rewatering","Any mix must be well aerated and drained. 2 parts peat moss, 1 part perlite, 1 part fir bark OR 1 part peat, 1 part pine bark OR 1 part peat, 1 part pine bark, 1 part cypress shavings. Add 2 ounces of dolomitic limestone to 4 gallons (half bushel) of soil mix and a minor element mix. Dissolve 1 ounce of 10-10-10 water-soluble fertilizer in 3 gallons of water. Use this solution after repotting and again monthly when watering. Also, add enough water to fill the vase formed by the overlapping leaf bases.");
 INSERT INTO plants VALUE ("Neoregelia zonata","Zonata","","High light areas with over 200 ftc, but not direct sun or medium light areas with 75 ftc to 200 ftc","Average: 65F night, 75F day temperatures","Average, 25 percent to 49 percent","surface of soil mix should dry before rewatering","Any mix must be well aerated and drained. 2 parts peat moss, 1 part perlite, 1 part fir bark OR 1 part peat, 1 part pine bark OR 1 part peat, 1 part pine bark, 1 part cypress shavings. Add 2 ounces of dolomitic limestone to 4 gallons (half bushel) of soil mix and a minor element mix. Dissolve 1 ounce of 10-10-10 water-soluble fertilizer in 3 gallons of water. Use this solution after repotting and again monthly when watering. Also, add enough water to fill the vase formed by the overlapping leaf bases.");
-
-
-DROP TABLE plantDescriptions;
 
 CREATE TABLE plantDescriptions (
     Botanical_Name varchar(512),
