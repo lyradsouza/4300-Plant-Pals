@@ -1,0 +1,50 @@
+<!doctype html>
+<meta charset="UTF-8">
+<title>Plant Pal!</title>
+<link rel="icon" href="https://em-content.zobj.net/thumbs/320/apple/271/potted-plant_1fab4.png">
+<!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"> -->
+<link rel="stylesheet" href="../static/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit&family=Montserrat&family=Open+Sans:wght@500&display=swap"
+    rel="stylesheet">
+
+<body onload="filterText()">
+    <div class="full-body-container">
+        <div class="top-text">
+            <div class="google-colors">
+                <h1 id="plant_color">Plant</h1>
+                <h1 id="pal_color">Pals</h1>
+                <h1>🪴</h1>
+            </div>
+            <h3 id="catch_phrase"><i>“Everyone deserves a plant”</i></h3>
+            <div class="search">
+                <p>Search: </p>
+            </div>
+            <div id="results">
+                <h2>Your Perfect Plant Suggestions!</h2>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function filterText() {
+            commonName = localStorage.getItem("plant_name")
+            description = localStorage.getItem("plant_description")
+            document.getElementById("results").innerHTML = ""
+            for (let i = 0; i < commonName.length; i++) {
+                let tempDiv = document.createElement("div")
+                tempDiv.innerHTML = descriptionBoxTemplate(commonName[i], description[i])
+                document.getElementById("results").appendChild(tempDiv)
+            }
+        }
+
+        function descriptionBoxTemplate(commonName, description) {
+            return `<div class=''>
+                <h3 class='episode-title'>${commonName}</h3>
+                <p class='episode-desc'>${description}</p>
+            </div>`
+        }
+    </script>
+</body>

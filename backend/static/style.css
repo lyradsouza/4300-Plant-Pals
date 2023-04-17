@@ -69,12 +69,12 @@ body {
 
 .options {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
 
     width: 75vw;
-    margin-top: 7px;
+    margin: 15px;
 }
 
 .option {
@@ -106,16 +106,42 @@ body {
 }
 
 #answer-box {
-    width: 700px;
+    width: 1000px;
     margin-top: 50px;
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-basis: 33.333333%;
+    /* padding-left: 0; */
+
 }
 
 .episode-title {
     font-family: 'Kanit', sans-serif;
+    width: 300px;
 }
 
 .episode-desc {
     font-family: 'Montserrat', sans-serif;
+    width: 300px;
+}
+
+.box {
+    padding: 10px;
+    outline: 2px solid black;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+button {
+    background-color: #6ebd8f;
+    padding: 10px;
+    /* outline: 2px solid #98cbda; */
+    border-radius: 10px;
+    color: black;
+    text-decoration: none;
+    outline: none;
 }
 
 /* #drop_down{
