@@ -50,6 +50,8 @@ def cosine_similarity(query, description, all_descriptions):
 
     A = query_to_vec(tokenize(query), allwords)
     B = doc_to_vec(tokenize(description), allwords)
+    if ((norm(A) * norm(B)) == 0):
+      return 0
     return float(dot(A, B)) / (norm(A) * norm(B))
 
 def create_ranked_list(query, descriptions, plant_ids):
