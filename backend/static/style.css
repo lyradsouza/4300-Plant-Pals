@@ -106,16 +106,32 @@ body {
 }
 
 #answer-box {
-    width: 700px;
+    width: 1000px;
     margin-top: 50px;
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-basis: 33.333333%;
+    /* padding-left: 0; */
+
 }
 
 .episode-title {
     font-family: 'Kanit', sans-serif;
+    width: 300px;
 }
 
 .episode-desc {
     font-family: 'Montserrat', sans-serif;
+    width: 300px;
+}
+
+.box {
+    padding: 10px;
+    outline: 2px solid black;
+    border-radius: 10px;
+    margin: 5px;
 }
 
 button {
