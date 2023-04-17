@@ -38,7 +38,6 @@ CORS(app)
 def descriptions_list():
     # query = ""
     query_sql = f"""SELECT * FROM plantDescriptions"""
-    # print(query_sql)
     keys = ["Botanical_Name","Common_Name","Plant_Description"]
     data = mysql_engine.query_selector(query_sql)
     print(data)
