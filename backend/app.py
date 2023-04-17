@@ -34,18 +34,18 @@ CORS(app)
 #     data = mysql_engine.query_selector(query_sql)
 #     return json.dumps([dict(zip(keys,i)) for i in data])
 
-# Returns a list of the descriptions in the plantDescription database
-def descriptions_list():
-    # query = ""
+# Returns 2 lists, first one is of common names, second one is descriptions
+def common_desc_lists():
     query_sql = f"""SELECT * FROM plantDescriptions"""
     keys = ["Botanical_Name","Common_Name","Plant_Description"]
     data = mysql_engine.query_selector(query_sql)
-    print(data)
     dict_data = [dict(zip(keys,i)) for i in data]
     desc_list = []
+    common_list = []
     for val in dict_data:
+        common_list.append(val['Common_Name'])
         desc_list.append(val['Plant_Description'])
-    return desc_list
+    return common_list, desc_list
 
 @app.route("/")
 def home():
@@ -60,13 +60,15 @@ def episodes_search():
 @app.route("/plants")
 def plants_search():
     query = request.args.get("description")
-    print(query)
-    descriptions = descriptions_list()
-    print(descriptions)
+    common_names, descriptions = common_desc_lists()
     id_list = range(len(descriptions))
-    print(len(descriptions))
-    ranked = jaccard_similarity(id_list, descriptions, query)
-    print(ranked)
+    ranked_plants = jaccard_similarity(id_list, descriptions, query)
+    ranked = []
+    if (ranked_plants == id_list):
+        ranked = []
+    else:
+        for i in ranked_plants:
+            ranked.append({'commonName': common_names[i], 'description': descriptions[i]})
     return ranked
 
 app.run(debug=True)

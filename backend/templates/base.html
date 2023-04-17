@@ -92,9 +92,10 @@
             </div>`
         }
 
-        function descriptionBoxTemplate(title) {
+        function descriptionBoxTemplate(commonName, description) {
             return `<div class=''>
-                <h3 class='episode-title'>${title}</h3>
+                <h3 class='episode-title'>${commonName}</h3>
+                <p class='episode-desc'>${description}</p>
             </div>`
         }
 
@@ -124,7 +125,7 @@
                 .then((data) => data.forEach(row => {
 
                     let tempDiv = document.createElement("div")
-                    tempDiv.innerHTML = answerBoxTemplate(row)
+                    tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description)
                     document.getElementById("answer-box").appendChild(tempDiv)
                 }));
 
