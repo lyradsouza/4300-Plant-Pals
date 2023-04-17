@@ -20,7 +20,7 @@
             <h3 id="catch_phrase"><i>“Everyone deserves a plant”</i></h3>
             <div class="search">
                 <div class="input-box" onclick="sendFocus()">
-                    <img src ="{{ url_for('static', filename='images/mag.png') }}" alt="magnifying glass for search"/>
+                    <img src="{{ url_for('static', filename='images/mag.png') }}" alt="magnifying glass for search" />
                     <input placeholder="Describe your Perfect Plant Pal!" id="filter-text-val" onkeyup="filterText()">
                 </div>
 
@@ -117,17 +117,24 @@
 
         // }
 
+        var data_dict = {}
         function filterText() {
             document.getElementById("answer-box").innerHTML = ""
-            console.log(document.getElementById("filter-text-val").value)
             fetch("/plants?" + new URLSearchParams({ description: document.getElementById("filter-text-val").value }).toString())
                 .then((response) => response.json())
                 .then((data) => data.forEach(row => {
                     let tempDiv = document.createElement("div")
                     tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description)
+                    data_dict[row.commonName] = row.description
                     document.getElementById("answer-box").appendChild(tempDiv)
                 }));
+            localStorage.setItem("data", data_dict)
+            //dict = localStorage.getItem("data")
+        }
 
+        for (let name in data_dict) {
+            console.log(data_dict[name])
+            console.log(name)
         }
 
     </script>
