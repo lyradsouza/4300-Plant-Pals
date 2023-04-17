@@ -3,6 +3,7 @@ import os
 from flask import Flask, render_template, request
 from flask_cors import CORS
 from helpers.MySQLDatabaseHandler import MySQLDatabaseHandler
+from jaccardsim import jaccard_similarity
 
 # ROOT_PATH for linking with all your files. 
 # Feel free to use a config.py or settings.py with a global export variable
@@ -12,7 +13,7 @@ os.environ['ROOT_PATH'] = os.path.abspath(os.path.join("..",os.curdir))
 # Don't worry about the deployment credentials, those are fixed
 # You can use a different DB name if you want to
 MYSQL_USER = "root"
-MYSQL_USER_PASSWORD = ""
+MYSQL_USER_PASSWORD = "MayankRao16Cornell.edu"
 MYSQL_PORT = 3306
 MYSQL_DATABASE = "plantsdb"
 
@@ -27,11 +28,25 @@ CORS(app)
 # Sample search, the LIKE operator in this case is hard-coded, 
 # but if you decide to use SQLAlchemy ORM framework, 
 # there's a much better and cleaner way to do this
-def sql_search(plant):
-    query_sql = f"""SELECT * FROM plants WHERE LOWER( Botanical_Name ) LIKE '%%{plant.lower()}%%' limit 10"""
-    keys = ["Botanical_Name","Common_Name","Flowering", "Light", "Temperature", "Humidity", "Watering", "Soil_Mix"]
+# def sql_search(plant):
+#     query_sql = f"""SELECT * FROM plants WHERE LOWER( Botanical_Name ) LIKE '%%{plant.lower()}%%' limit 10"""
+#     keys = ["Botanical_Name","Common_Name","Flowering", "Light", "Temperature", "Humidity", "Watering", "Soil_Mix"]
+#     data = mysql_engine.query_selector(query_sql)
+#     return json.dumps([dict(zip(keys,i)) for i in data])
+
+# Returns a list of the descriptions in the plantDescription database
+def descriptions_list():
+    # query = ""
+    query_sql = f"""SELECT * FROM plantDescriptions"""
+    # print(query_sql)
+    keys = ["Botanical_Name","Common_Name","Plant_Description"]
     data = mysql_engine.query_selector(query_sql)
-    return json.dumps([dict(zip(keys,i)) for i in data])
+    print(data)
+    dict_data = [dict(zip(keys,i)) for i in data]
+    desc_list = []
+    for val in dict_data:
+        desc_list.append(val['Plant_Description'])
+    return desc_list
 
 @app.route("/")
 def home():
@@ -43,4 +58,16 @@ def episodes_search():
     print(sql_search(text))
     return sql_search(text)
 
-#app.run(debug=True)
+@app.route("/plants")
+def plants_search():
+    query = request.args.get("description")
+    print(query)
+    descriptions = descriptions_list()
+    print(descriptions)
+    id_list = range(len(descriptions))
+    print(len(descriptions))
+    ranked = jaccard_similarity(id_list, descriptions, query)
+    print(ranked)
+    return ranked
+
+app.run(debug=True)
