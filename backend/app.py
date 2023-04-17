@@ -4,8 +4,7 @@ from flask import Flask, render_template, request
 from flask_cors import CORS
 from helpers.MySQLDatabaseHandler import MySQLDatabaseHandler
 from jaccardsim import jaccard_similarity
-from cosine_sim import cosine_similarity
-from collections import Counter
+from cosine import create_ranked_list
 
 # ROOT_PATH for linking with all your files. 
 # Feel free to use a config.py or settings.py with a global export variable
@@ -15,7 +14,7 @@ os.environ['ROOT_PATH'] = os.path.abspath(os.path.join("..",os.curdir))
 # Don't worry about the deployment credentials, those are fixed
 # You can use a different DB name if you want to
 MYSQL_USER = "root"
-MYSQL_USER_PASSWORD = "chocolove"
+MYSQL_USER_PASSWORD = "MayankRao16Cornell.edu"
 MYSQL_PORT = 3306
 MYSQL_DATABASE = "plantsdb"
 
@@ -49,6 +48,30 @@ def common_desc_lists():
         desc_list.append(val['Plant_Description'])
     return common_list, desc_list
 
+
+def plant_care_list():
+    query_sql = f"""SELECT * FROM plantCare"""
+    keys = ["Botanical_Name","Common_Name","Flowering", "Light", "Temperature", "Humidity", "Watering", "Soil_Mix"]
+    data = mysql_engine.query_selector(query_sql)
+    dict_data = [dict(zip(keys,i)) for i in data]
+    common_list = []
+    flowering_list = []
+    light_list = []
+    temperature_list = []
+    humidity_list = []
+    watering_list = []
+    soil_list = []
+    print("DD", dict_data)
+    for val in dict_data:
+        common_list.append(val['Common_Name'])
+        flowering_list.append(val['FLowering'])
+        light_list.append(val['Light'])
+        temperature_list.append(val['Temperature'])
+        humidity_list.append(val['Humidity'])
+        watering_list.append(val['Watering'])
+        soil_list.append(val['Soil_Mix'])
+    return common_list, flowering_list, light_list, temperature_list, humidity_list, watering_list, soil_list
+
 @app.route("/")
 def home():
     return render_template('base.html',title="sample html")
@@ -64,27 +87,30 @@ def plants_search():
     query = request.args.get("description")
     common_names, descriptions = common_desc_lists()
     id_list = range(len(descriptions))
-
-    # ranked_plants = jaccard_similarity(id_list, descriptions, query)
-    ranked_plants = cosine_similarity(query, descriptions, id_list)
-    #print(query)
-    #print(ranked_plants)
-    jacc_ranked_plants = jaccard_similarity(id_list, descriptions, query)
-    cos_ranked_plants = cosine_similarity(query, descriptions, id_list)
-    #print(jacc_ranked_plants)
-    #print(cos_ranked_plants)
-    id_sim_dict = Counter(jacc_ranked_plants) + Counter(cos_ranked_plants)
-
-    
-    ranked = sorted(id_sim_dict.items(), key=lambda x:x[1], reverse=True)
-    ranked_plants = [x[0] for x in ranked]
-
+    ranked_plants = jaccard_similarity(id_list, descriptions, query)
+    # ranked_plants = create_ranked_list(query, descriptions, id_list)
     ranked = []
-    if (ranked_plants == []):
+    if (ranked_plants == [*range(len(descriptions))]):
         return [{'commonName': "No Results Found :(", 'description': ""}]
     else:
         for i in ranked_plants:
             ranked.append({'commonName': common_names[i], 'description': descriptions[i]})
+    return ranked
+
+@app.route("/plantCare")
+def plant_care():
+    query = request.args.get("description")
+    common_list, flowering_list, light_list, temperature_list, humidity_list, watering_list, soil_list = plant_care_list()
+    print(flowering_list)
+    id_list = range(len(descriptions))
+    ranked_plants = jaccard_similarity(id_list, descriptions, query)
+    # ranked_plants = create_ranked_list(query, descriptions, id_list)
+    ranked = []
+    if (ranked_plants == [*range(len(descriptions))]):
+        return [{'commonName': "No Results Found :(", 'Flowering': "", 'Light': "", 'Temperature': "", 'Humidity': "", 'Watering':"", 'Soil_Mix':""}]
+    else:
+        for i in ranked_plants:
+            ranked.append({'commonName': common_list[i], 'Flowering': flowering_list[i], 'Light': light_list[i], 'Temperature': temperature_list[i], 'Humidity': humidity_list[i], 'Watering':watering_list[i], 'Soil_Mix':soil_list[i]})
     return ranked
 
 app.run(debug=True)

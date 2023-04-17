@@ -55,6 +55,10 @@
         <div id="answer-box">
 
         </div>
+
+        <div id="plant-care-box">
+            <p>PLANT CARE HERE</p>
+        </div>
     </div>
 
     <script>
@@ -80,9 +84,9 @@
 
 
 
-        function answerBoxTemplate(title, Flowering, Light, Temperature, Humidity, Watering, Soil_Mix) {
+        function answerBoxTemplate(commonName, Flowering, Light, Temperature, Humidity, Watering, Soil_Mix) {
             return `<div class=''>
-                <h3 class='episode-title'>${title}</h3>
+                <h3 class='episode-title'>${commonName}</h3>
                 <p class='episode-desc'>${Flowering}</p>
                 <p class='episode-desc'>${Light}</p>
                 <p class='episode-desc'>${Temperature}</p>
@@ -103,19 +107,9 @@
             document.getElementById('filter-text-val').focus()
         }
 
-        // function filterText() {
-        //     document.getElementById("answer-box").innerHTML = ""
-        //     console.log(document.getElementById("filter-text-val").value)
-        //     fetch("/episodes?" + new URLSearchParams({ title: document.getElementById("filter-text-val").value }).toString())
-        //         .then((response) => response.json())
-        //         .then((data) => data.forEach(row => {
-
-        //             let tempDiv = document.createElement("div")
-        //             tempDiv.innerHTML = answerBoxTemplate(row.Botanical_Name, row.Flowering, row.Light, row.Temperature, row.Humidity, row.Watering, row.Soil_Mix)
-        //             document.getElementById("answer-box").appendChild(tempDiv)
-        //         }));
-
-        // }
+        function filteredPlantCare() {
+            
+        }
 
         function filterText() {
             document.getElementById("answer-box").innerHTML = ""
@@ -128,7 +122,16 @@
                     tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description)
                     document.getElementById("answer-box").appendChild(tempDiv)
                 }));
-
+            
+            document.getElementById("plant-care-box").innerHTML = ""
+            console.log(document.getElementById("filter-text-val").value)
+            fetch("/plantCare?" + new URLSearchParams({ title: document.getElementById("filter-text-val").value }).toString())
+                .then((response) => response.json())
+                .then((data) => data.forEach(row => {
+                    let tempDiv = document.createElement("div")
+                    tempDiv.innerHTML = answerBoxTemplate(row.commonName, row.Flowering, row.Light, row.Temperature, row.Humidity, row.Watering, row.Soil_Mix)
+                    document.getElementById("plant-care-box").appendChild(tempDiv)
+                }));
         }
 
     </script>
