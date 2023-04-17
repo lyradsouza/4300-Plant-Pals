@@ -4,6 +4,7 @@ from flask import Flask, render_template, request
 from flask_cors import CORS
 from helpers.MySQLDatabaseHandler import MySQLDatabaseHandler
 from jaccardsim import jaccard_similarity
+from cosine import create_ranked_list
 
 # ROOT_PATH for linking with all your files. 
 # Feel free to use a config.py or settings.py with a global export variable
@@ -63,9 +64,10 @@ def plants_search():
     common_names, descriptions = common_desc_lists()
     id_list = range(len(descriptions))
     ranked_plants = jaccard_similarity(id_list, descriptions, query)
+    # ranked_plants = create_ranked_list(query, descriptions, id_list)
     ranked = []
-    if (ranked_plants == id_list):
-        ranked = []
+    if (ranked_plants == [*range(len(descriptions))]):
+        return [{'commonName': "No Results Found :(", 'description': ""}]
     else:
         for i in ranked_plants:
             ranked.append({'commonName': common_names[i], 'description': descriptions[i]})
