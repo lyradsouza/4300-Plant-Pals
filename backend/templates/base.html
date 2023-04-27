@@ -22,7 +22,7 @@
                     <input placeholder="Describe your Perfect Plant Pal!" id="filter-text-val">
                 </div>
 
-                <div class="options">
+                <!-- <div class="options">
                     <div class="option">
                         Light
                         <div class="slidecontainer">
@@ -48,7 +48,7 @@
                             <output id="temp-output">1</output>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <button type="button" href="{{ url_for('static', filename='results.html') }}" onclick="filterText()">Ready to
@@ -96,38 +96,6 @@
         function descriptionBoxTemplate(commonName, description) {
             return `<div class='box'>
                 <h3 class='episode-title'>${commonName}</h3>
-                <form class="rating">
-                    <label>
-                        <input type="radio" name="stars" value="1" />
-                        <span class="icon">★</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="stars" value="2" />
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="stars" value="3" />
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>   
-                    </label>
-                    <label>
-                        <input type="radio" name="stars" value="4" />
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="stars" value="5" />
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                        <span class="icon">★</span>
-                    </label>
-                    </form>
                 <p class='episode-desc'>${description}</p>
             </div>`
         }
