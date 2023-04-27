@@ -5,6 +5,7 @@ from flask_cors import CORS
 from helpers.MySQLDatabaseHandler import MySQLDatabaseHandler
 from jaccardsim import jaccard_similarity
 from cosine_sim import cosine_similarity
+from rocchio import rocchio
 from collections import Counter
 
 # ROOT_PATH for linking with all your files. 
@@ -15,7 +16,7 @@ os.environ['ROOT_PATH'] = os.path.abspath(os.path.join("..",os.curdir))
 # Don't worry about the deployment credentials, those are fixed
 # You can use a different DB name if you want to
 MYSQL_USER = "root"
-MYSQL_USER_PASSWORD = "MayankRao16Cornell.edu"
+MYSQL_USER_PASSWORD = ""
 MYSQL_PORT = 3306
 MYSQL_DATABASE = "plantsdb"
 
@@ -87,4 +88,25 @@ def plants_search():
             ranked.append({'commonName': common_names[i], 'description': descriptions[i]})
     return ranked
 
-# app.run(debug=True)
+@app.route("/rocchio")
+def rocchio_search():
+    query = request.args.get("description")
+    relevant = request.args.get() # get thumbs up docs 
+    irrelevant = request.args.get() # get thumbs down docs 
+
+    common_names, descriptions = common_desc_lists()
+    id_list = range(len(descriptions))
+
+    ranked_plants = rocchio(query, descriptions, id_list, relevant, irrelevant)
+
+    ranked = []
+    if (ranked_plants == []):
+        return [{'commonName': "No Results Found :(", 'description': ""}]
+    else:
+        for i in ranked_plants:
+            ranked.append({'commonName': common_names[i], 'description': descriptions[i]})
+    return ranked
+
+
+
+app.run(debug=True)
