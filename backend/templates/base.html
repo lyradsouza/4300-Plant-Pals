@@ -6,6 +6,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kanit&family=Montserrat&family=Open+Sans:wght@500&display=swap"
     rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <body>
     <div class="full-body-container">
@@ -51,10 +52,14 @@
                 </div>
             </div>
         </div>
-        <button type="button" href="{{ url_for('static', filename='results.html') }}" onclick="filterText()">Ready to
+        <button type="button" class="submit" href="{{ url_for('static', filename='results.html') }}" onclick="filterText()">Ready to
             meet your perfect plant?!</button>
         <div id="answer-box">
-
+        </div>
+        <div hidden id="thumbs">
+            <p> How are your results?</p>
+            <button type="button" class="submit-thumbs" onclick="thumbsUp()"><i class="fa fa-thumbs-up"></i></button>
+            <button type="button" class="submit-thumbs" onclick="thumbsDown()"><i class="fa fa-thumbs-down"></i></button>
         </div>
     </div>
 
@@ -164,7 +169,13 @@
 
         // }
 
+        function toggleRating() {
+            var thumbs = document.getElementById("thumbs");
+            thumbs.style.display = "block";
+        }
+
         function filterText() {
+            
             document.getElementById("answer-box").innerHTML = ""
             fetch("/plants?" + new URLSearchParams({ description: document.getElementById("filter-text-val").value }).toString())
                 .then((response) => response.json())
@@ -173,6 +184,15 @@
                     tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description)
                     document.getElementById("answer-box").appendChild(tempDiv)
                 }));
+            toggleRating()
+        }
+
+        function thumbsUp() {
+            // get all docs that are currently being shown and add them to the relevant list
+        }
+
+        function thumbsDown() {
+            // get all docs that are currently being shown and add them to the irrelevant list
         }
 
 

@@ -134,7 +134,7 @@ body {
     margin: 5px;
 }
 
-button {
+.submit {
     background-color: #6ebd8f;
     padding: 10px;
     /* outline: 2px solid #98cbda; */
@@ -142,6 +142,15 @@ button {
     color: black;
     text-decoration: none;
     outline: none;
+}
+
+.submit-thumbs {
+  background-color: #6ebd8f;
+  padding: 5px;
+  border-radius: 10px;
+  color: black;
+  text-decoration: none;
+  outline: none; 
 }
 
 .rating {
@@ -208,6 +217,14 @@ button {
   .rating label input:focus:not(:checked) ~ .icon:last-child {
     color: darkgreen;
     text-shadow: 0 0 5px green;
+  }
+
+  #thumbs {
+    /* background-color: aqua; */
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    padding: 10px;
+    text-align: center;
   }
 
 /* #drop_down{
