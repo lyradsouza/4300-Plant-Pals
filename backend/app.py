@@ -87,4 +87,4 @@ def plants_search():
             ranked.append({'commonName': common_names[i], 'description': descriptions[i]})
     return ranked
 
-# app.run(debug=True)
+app.run(debug=True)
