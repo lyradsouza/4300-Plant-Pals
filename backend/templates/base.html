@@ -91,13 +91,13 @@
             var max = 5; // maximum rating
         
             while(increment < rate) {
-            starHTML += '<i class="material-icons orange">grade</i>';
-            increment++;
+                starHTML += '<i class="material-icons orange">grade</i>';
+                increment++;
             }
         
             while(max > rate) {
-            starHTML += '<i class="material-icons gray">grade</i>';
-            max--;
+                starHTML += '<i class="material-icons gray">grade</i>';
+                max--;
             }
             return starHTML;
         };
