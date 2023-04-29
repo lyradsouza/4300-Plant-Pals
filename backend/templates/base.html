@@ -6,6 +6,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kanit&family=Montserrat&family=Open+Sans:wght@500&display=swap"
     rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <body>
     <div class="full-body-container">
@@ -22,7 +24,7 @@
                     <input placeholder="Describe your Perfect Plant Pal!" id="filter-text-val">
                 </div>
 
-                <div class="options">
+                <!-- <div class="options">
                     <div class="option">
                         Light
                         <div class="slidecontainer">
@@ -48,13 +50,19 @@
                             <output id="temp-output">1</output>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
-        <button type="button" href="{{ url_for('static', filename='results.html') }}" onclick="filterText()">Ready to
+        <button type="button" class="submit" href="{{ url_for('static', filename='results.html') }}"
+            onclick="filterText()">Ready to
             meet your perfect plant?!</button>
         <div id="answer-box">
-
+        </div>
+        <div hidden id="thumbs">
+            <p> How are your results?</p>
+            <button type="button" class="submit-thumbs" onclick="thumbsUp()"><i class="fa fa-thumbs-up"></i></button>
+            <button type="button" class="submit-thumbs" onclick="thumbsDown()"><i
+                    class="fa fa-thumbs-down"></i></button>
         </div>
     </div>
 
@@ -78,6 +86,24 @@
             water_slider_val = val;
         }
 
+        function star(rate) {
+            var starHTML = '';
+            var rate = parseFloat(rate);
+            var increment = 0;
+            var max = 5; // maximum rating
+
+            while (increment < rate) {
+                starHTML += '<span class="star-icons">★</span>';
+                increment++;
+            }
+
+            while (increment < max) {
+                starHTML += '<span class="star-icons-extra">☆</span>';
+                increment++;
+            }
+
+            return starHTML;
+        };
 
 
 
@@ -93,9 +119,11 @@
             </div>`
         }
 
-        function descriptionBoxTemplate(commonName, description) {
+        function descriptionBoxTemplate(commonName, description, rate) {
             return `<div class='box'>
                 <h3 class='episode-title'>${commonName}</h3>
+                <h3 class='rating-desc'>Average User Rating of This Plant:</h3>
+                <div>${star(rate)}</div>
                 <p class='episode-desc'>${description}</p>
             </div>`
         }
@@ -132,17 +160,31 @@
 
         // }
 
+        function toggleRating() {
+            var thumbs = document.getElementById("thumbs");
+            thumbs.style.display = "block";
+        }
+
         function filterText() {
+
             document.getElementById("answer-box").innerHTML = ""
             fetch("/plants?" + new URLSearchParams({ description: document.getElementById("filter-text-val").value }).toString())
                 .then((response) => response.json())
                 .then((data) => data.forEach(row => {
                     let tempDiv = document.createElement("div")
-                    tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description)
+                    tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description, row.rating)
                     document.getElementById("answer-box").appendChild(tempDiv)
                 }));
+            toggleRating()
         }
 
+        function thumbsUp() {
+            // get all docs that are currently being shown and add them to the relevant list
+        }
+
+        function thumbsDown() {
+            // get all docs that are currently being shown and add them to the irrelevant list
+        }
 
     </script>
 </body>
