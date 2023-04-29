@@ -120,6 +120,13 @@ body {
 .episode-title {
   font-family: 'Kanit', sans-serif;
   width: 300px;
+  font-size: 25px;
+}
+
+.rating-desc {
+  font-family: 'Kanit', sans-serif;
+  width: 300px;
+  font-size: 17px;
 }
 
 .episode-desc {
