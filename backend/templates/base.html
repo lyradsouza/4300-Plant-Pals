@@ -53,14 +53,16 @@
                 </div> -->
             </div>
         </div>
-        <button type="button" class="submit" href="{{ url_for('static', filename='results.html') }}" onclick="filterText()">Ready to
+        <button type="button" class="submit" href="{{ url_for('static', filename='results.html') }}"
+            onclick="filterText()">Ready to
             meet your perfect plant?!</button>
         <div id="answer-box">
         </div>
         <div hidden id="thumbs">
             <p> How are your results?</p>
             <button type="button" class="submit-thumbs" onclick="thumbsUp()"><i class="fa fa-thumbs-up"></i></button>
-            <button type="button" class="submit-thumbs" onclick="thumbsDown()"><i class="fa fa-thumbs-down"></i></button>
+            <button type="button" class="submit-thumbs" onclick="thumbsDown()"><i
+                    class="fa fa-thumbs-down"></i></button>
         </div>
     </div>
 
@@ -89,16 +91,17 @@
             var rate = parseFloat(rate);
             var increment = 0;
             var max = 5; // maximum rating
-        
-            while(increment < rate) {
-            starHTML += '<i class="material-icons orange">grade</i>';
-            increment++;
+
+            while (increment < rate) {
+                starHTML += '<span class="star-icons">★</span>';
+                increment++;
             }
-        
-            while(max > rate) {
-            starHTML += '<i class="material-icons gray">grade</i>';
-            max--;
+
+            while (increment < max) {
+                starHTML += '<span class="star-icons-extra">☆</span>';
+                increment++;
             }
+
             return starHTML;
         };
 
@@ -162,7 +165,7 @@
         }
 
         function filterText() {
-            
+
             document.getElementById("answer-box").innerHTML = ""
             fetch("/plants?" + new URLSearchParams({ description: document.getElementById("filter-text-val").value }).toString())
                 .then((response) => response.json())
