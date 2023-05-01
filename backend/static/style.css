@@ -159,6 +159,7 @@ body {
   color: black;
   text-decoration: none;
   outline: none;
+  font-size: 24px;
 }
 
 .rating {
@@ -241,6 +242,14 @@ body {
 
 .star-icons-extra {
   color: green;
+}
+
+img {
+  float: left;
+  width:  100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 7px;
 }
 
 /* #drop_down{
