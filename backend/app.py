@@ -40,7 +40,7 @@ CORS(app)
 # Returns 2 lists, first one is of common names, second one is descriptions
 def common_desc_lists():
     query_sql = f"""SELECT * FROM plantDescriptions"""
-    keys = ["Botanical_Name","Common_Name","Plant_Description", "Rating", "Plant_Image"]
+    keys = ["Botanical_Name","Common_Name", "Rating", "Plant_Description", "Plant_Image"]
     data = mysql_engine.query_selector(query_sql)
     dict_data = [dict(zip(keys,i)) for i in data]
     desc_list = []

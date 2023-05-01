@@ -59,15 +59,16 @@
         <div id="answer-box">
         </div>
 
-        
+
 
         <div hidden id="thumbs">
             <p> How are your results?</p>
 
-            <button type="button" name="projectFilepath" class="submit-thumbs" onclick="thumbsUp()"><i class="fa fa-thumbs-up"></i></button>
+            <button type="button" name="projectFilepath" class="submit-thumbs" onclick="thumbsUp()"><i
+                    class="fa fa-thumbs-up"></i></button>
             <button name="projectFilepath" type="button" class="submit-thumbs" onclick="thumbsDown()"><i
-                class="fa fa-thumbs-down"></i></button>
-                
+                    class="fa fa-thumbs-down"></i></button>
+
         </div>
     </div>
 
@@ -127,7 +128,7 @@
         function descriptionBoxTemplate(commonName, description, rate, image) {
             return `<div class='box'>
                 <h3 class='episode-title'>${commonName}</h3>
-                <img class='image'>${image}</img>
+                <img src=${image} class ='image'/>
                 <div class='rating-section'>
                     <h3 class='rating-desc'>Average User Rating of This Plant:</h3>
                     <div>${star(rate)}</div>
