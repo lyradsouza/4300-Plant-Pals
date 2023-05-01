@@ -129,9 +129,16 @@ body {
   font-size: 17px;
 }
 
-.episode-desc {
+.plant-desc {
   font-family: 'Montserrat', sans-serif;
   width: 300px;
+  /* height:100px; */
+  /* overflow: hidden; */
+}
+
+.popup-desc {
+  font-family: 'Montserrat', sans-serif;
+  /* width: 300px; */
 }
 
 .box {
@@ -269,7 +276,7 @@ img {
 } */
 
 .pbox {
-    background-color: black;
+    /* background-color: black; */
     height: 100vh;
     display: flex;
     align-items: center;
@@ -294,7 +301,7 @@ p {
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(254, 126, 126, 0.7);
+    background: rgba(170, 242, 233, 0.7);
     transition: all 0.4s;
     visibility: hidden;
     opacity: 0;
@@ -302,9 +309,11 @@ p {
 .content {
     position: absolute;
     background: white;
-    width: 400px;
+    width: 500px;
     padding: 1em 2em;
     border-radius: 4px;
+    outline: 2px solid black;
+    border-radius: 10px;
 } 
 .modal:target {
     visibility: visible;
@@ -314,7 +323,7 @@ p {
     position: absolute;
     top: 0;
     right: 15px;
-    color: #fe0606;
+    color:  #6ebd8f;
     text-decoration: none;
-    font-size: 30px;
+    font-size: 20px;
 }
