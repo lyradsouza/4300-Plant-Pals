@@ -16,7 +16,7 @@ os.environ['ROOT_PATH'] = os.path.abspath(os.path.join("..",os.curdir))
 # Don't worry about the deployment credentials, those are fixed
 # You can use a different DB name if you want to
 MYSQL_USER = "root"
-MYSQL_USER_PASSWORD = "MayankRao16Cornell.edu"
+MYSQL_USER_PASSWORD = ""
 MYSQL_PORT = 3306
 MYSQL_DATABASE = "plantsdb"
 
@@ -40,22 +40,24 @@ CORS(app)
 # Returns 2 lists, first one is of common names, second one is descriptions
 def common_desc_lists():
     query_sql = f"""SELECT * FROM plantDescriptions"""
-    keys = ["Botanical_Name","Common_Name","Plant_Description", "Rating"]
+    keys = ["Botanical_Name","Common_Name", "Rating", "Plant_Description", "Plant_Image"]
     data = mysql_engine.query_selector(query_sql)
     dict_data = [dict(zip(keys,i)) for i in data]
     desc_list = []
     common_list = []
     rating_list = []
+    image_list = []
     for val in dict_data:
         common_list.append(val['Common_Name'])
         # desc_list.append(val['Plant_Description'] + " Also known as " + val['Botanical_Name']+".")
         desc_list.append(val['Plant_Description'])
 
         rating_list.append(val['Rating'])
-    return common_list, desc_list, rating_list
+        image_list.append(val['Plant_Image'])
+    return common_list, desc_list, rating_list, image_list
 
 def plants_ranked(query):
-    common_names, descriptions, ratings = common_desc_lists()
+    common_names, descriptions, ratings, images = common_desc_lists()
     id_list = range(len(descriptions))
 
     # ranked_plants = jaccard_similarity(id_list, descriptions, query)
@@ -72,7 +74,7 @@ def plants_ranked(query):
         return [{'commonName': "No Results Found :(", 'description': ""}]
     else:
         for i in ranked_plants:
-            ranked.append({'commonName': common_names[i], 'description': descriptions[i], 'rating': ratings[i]})
+            ranked.append({'commonName': common_names[i], 'description': descriptions[i], 'rating': ratings[i], 'image':images[i]})
     return ranked
 
 
