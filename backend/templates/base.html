@@ -221,7 +221,7 @@
                 .then((response) => response.json())
                 .then((data) => data.forEach(row => {
                     let tempDiv = document.createElement("div")
-                    tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description, row.rating)
+                    tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description, row.rating, row.image)
                     document.getElementById("answer-box").appendChild(tempDiv)
                 }));
         }
