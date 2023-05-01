@@ -71,7 +71,7 @@ def plants_ranked(query):
 
     ranked = []
     if (ranked_plants == []):
-        return [{'commonName': "No Results Found :(", 'description': ""}]
+        return [{'commonName': "No Results Found :(", 'description': "", 'rating':"", 'image':"static/images/sad_plant.jpg"}]
     else:
         for i in ranked_plants:
             ranked.append({'commonName': common_names[i], 'description': descriptions[i], 'rating': ratings[i], 'image':images[i]})
@@ -102,7 +102,7 @@ def rocchio_search():
 
     relevant_list = []
     irrelevant_list = []
-    common_names, descriptions, ratings = common_desc_lists()
+    common_names, descriptions, ratings, images = common_desc_lists()
 
     if relevant == "True":
         for entry in ranked: 
@@ -127,7 +127,7 @@ def rocchio_search():
         return [{'commonName': "No Results Found :(", 'description': ""}]
     else:
         for i in ranked_plants:
-            ranked.append({'commonName': common_names[i], 'description': descriptions[i], 'rating': ratings[i]})
+            ranked.append({'commonName': common_names[i], 'description': descriptions[i], 'rating': ratings[i], 'image':images[i]})
     return ranked
 
 

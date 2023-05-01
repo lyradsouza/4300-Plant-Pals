@@ -126,12 +126,22 @@
         }
 
         function descriptionBoxTemplate(commonName, description, rate, image) {
-            return `<div class='box'>
+            if (rate == "") {
+                display = ""
+                stars = ""
+                box = "<div class='no-results-box'>"
+            }
+            else {
+                display = "Average User Rating of This Plant:"
+                stars = star(rate)
+                box = "<div class='box'>"
+            }
+            return `${box}
                 <h3 class='episode-title'>${commonName}</h3>
                 <img src=${image} class ='image'/>
                 <div class='rating-section'>
-                    <h3 class='rating-desc'>Average User Rating of This Plant:</h3>
-                    <div>${star(rate)}</div>
+                    <h3 class='rating-desc'>${display}</h3>
+                    <div>${stars}</div>
                 </div>
                 <p class='episode-desc'>${description}</p>
             </div>`
@@ -198,7 +208,7 @@
                 .then((response) => response.json())
                 .then((data) => data.forEach(row => {
                     let tempDiv = document.createElement("div")
-                    tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description, row.rating)
+                    tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description, row.rating, row.image)
                     document.getElementById("answer-box").appendChild(tempDiv)
                 }));
             // get all docs that are currently being shown and add them to the relevant list

@@ -141,6 +141,11 @@ body {
   margin: 5px;
 }
 
+.no-results-box {
+  padding: 10px;
+  border-radius: 10px;
+}
+
 .submit {
   background-color: #6ebd8f;
   padding: 10px;
@@ -246,7 +251,7 @@ body {
 
 img {
   float: left;
-  width:  100px;
+  width: 100px;
   height: 100px;
   object-fit: cover;
   margin-right: 7px;
