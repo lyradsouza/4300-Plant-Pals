@@ -118,6 +118,9 @@ def rocchio_search():
     common_names, descriptions, ratings = common_desc_lists()
     light, temp, watering = plant_care_lists()
 
+    print("D", len(descriptions))
+    print(len(temp))
+
     if relevant == "True":
         for entry in ranked: 
             relevant_list.append(entry['description'])
