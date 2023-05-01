@@ -1,7 +1,7 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
 
-def rocchio(query, descriptions, plant_ids, relevant_descs, irrelevant_descs, a=0.3, b=0.3, c=0.8, clip = True):
+def rocchio(query, descriptions, plant_ids, relevant_descs, irrelevant_descs, a=0.8, b=0.3, c=0.3, clip = False):
 
 
     plant_desc_to_id = d = dict(zip(descriptions, plant_ids))
@@ -42,29 +42,46 @@ def rocchio(query, descriptions, plant_ids, relevant_descs, irrelevant_descs, a=
     
     
     # Create our revised query 
-    q1 = a * q0 + rel - irrel                                                                                   
-    
+    q1 = a * q0 + rel - irrel    
+
+
     # Clip nonzero values if required
     if clip:
         q1[q1 < 0] = 0
 
+    sims = []
+    for i in range(len(descriptions)):
+        if type(descriptions[i]) == str:     
+          terms_desc = input_doc_matrix[i]
+          terms_query = q1
+          sims.append(np.dot(terms_desc, terms_query))
+        else:
+          sims.append(0)
+    
+    id_sim_dict = dict(zip(plant_ids, sims))
+    ranked = sorted(id_sim_dict.items(), key = lambda x:x[1], reverse = True)
+    ranked = [x[0] for x in ranked]
 
-    ranking = []
+    return ranked[:10]
+    
 
-    query = query
-    updated_query = q1
 
-    # update rankings for each plant decsription based on rocchio 
-    r = np.zeros([len(input_doc_matrix)])
-    for j in range(len(input_doc_matrix)):
-        r[j] = np.dot(updated_query, input_doc_matrix[j, :])
+    # ranking = []
+
+    # query = query
+    # updated_query = q1
+
+    # # update rankings for each plant decsription based on rocchio 
+    # r = np.zeros([len(input_doc_matrix)])
+    # for j in range(len(input_doc_matrix)):
+    #     r[j] = np.dot(updated_query, input_doc_matrix[j, :])
       
-    plant_idx = np.argsort(r)[-10:]
-    plant_idx = np.flip(plant_idx)
+    # plant_idx = np.argsort(r)[-10:]
+    # plant_idx = np.flip(plant_idx)
 
-    for m in plant_idx:
-        ranking.append(m-1)
+    # for m in plant_idx:
+    #     ranking.append(m-1)
 
-    # returns ids of top 10 most relevant plants based on rocchio update  
-    return ranking 
+    # # returns ids of top 10 most relevant plants based on rocchio update  
+    # return ranking 
             
