@@ -37,6 +37,22 @@ CORS(app)
 #     data = mysql_engine.query_selector(query_sql)
 #     return json.dumps([dict(zip(keys,i)) for i in data])
 
+
+def plant_care_lists(plant):
+    query_sql = f"""SELECT * FROM plants WHERE LOWER( Botanical_Name ) LIKE '%%{plant.lower()}%%' limit 10"""
+    keys = ["Botanical_Name","Common_Name","Flowering", "Light", "Temperature", "Humidity", "Watering", "Soil_Mix"]
+    data = mysql_engine.query_selector(query_sql)
+    dict_data = [dict(zip(keys,i)) for i in data]
+    light_list = []
+    temp_list = []
+    watering_list = []
+    for val in dict_data:
+        light_list.append(val['Light'])
+        # desc_list.append(val['Plant_Description'] + " Also known as " + val['Botanical_Name']+".")
+        temp_list.append(val['Temperature'])
+        watering_list.append(val['Watering'])
+    return light_list, temp_list, watering_list
+
 # Returns 2 lists, first one is of common names, second one is descriptions
 def common_desc_lists():
     query_sql = f"""SELECT * FROM plantDescriptions"""
@@ -128,5 +144,10 @@ def rocchio_search():
             ranked.append({'commonName': common_names[i], 'description': descriptions[i], 'rating': ratings[i]})
     return ranked
 
+
+@app.route("/popup")
+def popUp():
+    query = request.args.get("query")
+    return render_template('popup.html', title=query)
 
 app.run(debug=True)

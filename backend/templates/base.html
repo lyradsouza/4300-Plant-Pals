@@ -23,7 +23,6 @@
                     <img src="{{ url_for('static', filename='images/mag.png') }}" />
                     <input placeholder="Describe your Perfect Plant Pal!" id="filter-text-val">
                 </div>
-
                 <!-- <div class="options">
                     <div class="option">
                         Light
@@ -125,16 +124,33 @@
         }
 
         function descriptionBoxTemplate(commonName, description, rate) {
-            return `<div class='box'>
+            return `<button class='box' type=button onclick=loadPopUp()>
                 <h3 class='episode-title'>${commonName}</h3>
                 <h3 class='rating-desc'>Average User Rating of This Plant:</h3>
                 <div>${star(rate)}</div>
-                <p class='episode-desc'>${description}</p>
+                
             </div>`
         }
+        
 
         function sendFocus() {
             document.getElementById('filter-text-val').focus()
+        }
+
+        function plantPopUp(commonName, description) {
+            sessionStorage.setItem('commonName', commonName)
+            sessionStorage.getItem('label', description)
+        }
+
+        function loadPopUp() {
+            fetch("/popup?" + new URLSearchParams({ query: document.getElementById("filter-text-val").value }).toString())
+                .then((response) => window.location.href = "/popup")
+                // .then((data) => data.forEach(row => {
+                //     let tempDiv = document.createElement("div")
+                //     tempDiv.innerHTML = answerBoxTemplate(row.Botanical_Name, row.Flowering, row.Light, row.Temperature, row.Humidity, row.Watering, row.Soil_Mix)
+                //     document.getElementById("answer-box").appendChild(tempDiv)
+                // }));
+            
         }
 
         // function filterText() {

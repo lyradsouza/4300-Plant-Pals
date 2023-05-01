@@ -1,0 +1,27 @@
+<div class='pop-up'>
+  <h3 class='episode-title'>${sessionStorage.getItem("commonName")}</h3>
+  <p class='episode-desc'>{{title}}</p>
+  <div id="answer-box"></div>
+</div>
+
+
+<script>
+
+function filterText() {
+
+  document.getElementById("answer-box").innerHTML = ""
+  fetch("/plant-data?" + new URLSearchParams({ description: document.getElementById("filter-text-val").value }).toString())
+      .then((response) => response.json())
+      .then((data) => data.forEach(row => {
+          let tempDiv = document.createElement("div")
+          tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description, row.rating)
+          document.getElementById("answer-box").appendChild(tempDiv)
+      }));
+  toggleRating()
+}
+
+function loadPopUp() {
+  window.location.href = "/popup";
+}
+
+</script>
