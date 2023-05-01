@@ -58,11 +58,16 @@
             meet your perfect plant?!</button>
         <div id="answer-box">
         </div>
+
+        
+
         <div hidden id="thumbs">
             <p> How are your results?</p>
-            <button type="button" class="submit-thumbs" onclick="thumbsUp()"><i class="fa fa-thumbs-up"></i></button>
-            <button type="button" class="submit-thumbs" onclick="thumbsDown()"><i
-                    class="fa fa-thumbs-down"></i></button>
+
+            <button type="button" name="projectFilepath" class="submit-thumbs" onclick="thumbsUp()"><i class="fa fa-thumbs-up"></i></button>
+            <button name="projectFilepath" type="button" class="submit-thumbs" onclick="thumbsDown()"><i
+                class="fa fa-thumbs-down"></i></button>
+                
         </div>
     </div>
 
@@ -179,11 +184,29 @@
         }
 
         function thumbsUp() {
+            var relevant_divs = document.getElementById("answer-box")
+            var relevant_docs = []
+            document.getElementById("answer-box").innerHTML = ""
+            fetch("/rocchio?" + new URLSearchParams({ description: document.getElementById("filter-text-val").value, relevant: "True" }).toString())
+                .then((response) => response.json())
+                .then((data) => data.forEach(row => {
+                    let tempDiv = document.createElement("div")
+                    tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description, row.rating)
+                    document.getElementById("answer-box").appendChild(tempDiv)
+                }));
             // get all docs that are currently being shown and add them to the relevant list
         }
 
         function thumbsDown() {
             // get all docs that are currently being shown and add them to the irrelevant list
+            document.getElementById("answer-box").innerHTML = ""
+            fetch("/rocchio?" + new URLSearchParams({ description: document.getElementById("filter-text-val").value, relevant: "False" }).toString())
+                .then((response) => response.json())
+                .then((data) => data.forEach(row => {
+                    let tempDiv = document.createElement("div")
+                    tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description, row.rating)
+                    document.getElementById("answer-box").appendChild(tempDiv)
+                }));
         }
 
     </script>

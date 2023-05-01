@@ -63,7 +63,7 @@ def rocchio(query, descriptions, plant_ids, relevant_descs, irrelevant_descs, a=
     plant_idx = np.flip(plant_idx)
 
     for m in plant_idx:
-        ranking.append(m)
+        ranking.append(m-1)
 
     # returns ids of top 10 most relevant plants based on rocchio update  
     return ranking 

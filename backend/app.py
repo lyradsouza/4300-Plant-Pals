@@ -16,7 +16,7 @@ os.environ['ROOT_PATH'] = os.path.abspath(os.path.join("..",os.curdir))
 # Don't worry about the deployment credentials, those are fixed
 # You can use a different DB name if you want to
 MYSQL_USER = "root"
-MYSQL_USER_PASSWORD = ""
+MYSQL_USER_PASSWORD = "MayankRao16Cornell.edu"
 MYSQL_PORT = 3306
 MYSQL_DATABASE = "plantsdb"
 
@@ -48,9 +48,33 @@ def common_desc_lists():
     rating_list = []
     for val in dict_data:
         common_list.append(val['Common_Name'])
-        desc_list.append(val['Plant_Description'] + " Also known as " + val['Botanical_Name']+".")
+        # desc_list.append(val['Plant_Description'] + " Also known as " + val['Botanical_Name']+".")
+        desc_list.append(val['Plant_Description'])
+
         rating_list.append(val['Rating'])
     return common_list, desc_list, rating_list
+
+def plants_ranked(query):
+    common_names, descriptions, ratings = common_desc_lists()
+    id_list = range(len(descriptions))
+
+    # ranked_plants = jaccard_similarity(id_list, descriptions, query)
+    ranked_plants = cosine_similarity(query, descriptions, id_list)
+    jacc_ranked_plants = jaccard_similarity(id_list, descriptions, query)
+    cos_ranked_plants = cosine_similarity(query, descriptions, id_list)
+    id_sim_dict = Counter(jacc_ranked_plants) + Counter(cos_ranked_plants)
+
+    ranked = sorted(id_sim_dict.items(), key=lambda x:x[1], reverse=True)
+    ranked_plants = [x[0] for x in ranked]
+
+    ranked = []
+    if (ranked_plants == []):
+        return [{'commonName': "No Results Found :(", 'description': ""}]
+    else:
+        for i in ranked_plants:
+            ranked.append({'commonName': common_names[i], 'description': descriptions[i], 'rating': ratings[i]})
+    return ranked
+
 
 @app.route("/")
 def home():
@@ -65,48 +89,43 @@ def episodes_search():
 @app.route("/plants")
 def plants_search():
     query = request.args.get("description")
+    return plants_ranked(query)
+
+@app.route("/rocchio", methods=['GET'])
+def rocchio_search():
+    query = request.args.get("description")
+    ranked = plants_ranked(query)
+    # True or False Parameter (true if up arrow clicked, false if down arrow clicked)
+    relevant = request.args.get("relevant") # get thumbs up docs 
+
+    relevant_list = []
+    irrelevant_list = []
     common_names, descriptions, ratings = common_desc_lists()
+
+    if relevant == "True":
+        for entry in ranked: 
+            relevant_list.append(entry['description'])
+        for desc in descriptions:
+            if desc not in relevant_list:  
+                irrelevant_list.append(desc)
+    else: 
+        for entry in ranked: 
+            irrelevant_list.append(entry['description'])
+        for desc in descriptions:
+            if desc not in relevant_list:  
+                relevant_list.append(desc)
+
     id_list = range(len(descriptions))
 
-    # ranked_plants = jaccard_similarity(id_list, descriptions, query)
-    ranked_plants = cosine_similarity(query, descriptions, id_list)
-    #print(query)
-    #print(ranked_plants)
-    jacc_ranked_plants = jaccard_similarity(id_list, descriptions, query)
-    cos_ranked_plants = cosine_similarity(query, descriptions, id_list)
-    #print(jacc_ranked_plants)
-    #print(cos_ranked_plants)
-    id_sim_dict = Counter(jacc_ranked_plants) + Counter(cos_ranked_plants)
-
+    ranked_plants = rocchio(query, descriptions, id_list, relevant_list, irrelevant_list)
     
-    ranked = sorted(id_sim_dict.items(), key=lambda x:x[1], reverse=True)
-    ranked_plants = [x[0] for x in ranked]
-
     ranked = []
+
     if (ranked_plants == []):
         return [{'commonName': "No Results Found :(", 'description': ""}]
     else:
         for i in ranked_plants:
             ranked.append({'commonName': common_names[i], 'description': descriptions[i], 'rating': ratings[i]})
-    return ranked
-
-@app.route("/rocchio")
-def rocchio_search():
-    query = request.args.get("description")
-    relevant = request.args.get() # get thumbs up docs 
-    irrelevant = request.args.get() # get thumbs down docs 
-
-    common_names, descriptions = common_desc_lists()
-    id_list = range(len(descriptions))
-
-    ranked_plants = rocchio(query, descriptions, id_list, relevant, irrelevant)
-
-    ranked = []
-    if (ranked_plants == []):
-        return [{'commonName': "No Results Found :(", 'description': ""}]
-    else:
-        for i in ranked_plants:
-            ranked.append({'commonName': common_names[i], 'description': descriptions[i]})
     return ranked
 
 
