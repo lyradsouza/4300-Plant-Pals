@@ -68,6 +68,7 @@ def plants_ranked(query):
 
     ranked = sorted(id_sim_dict.items(), key=lambda x:x[1], reverse=True)
     ranked_plants = [x[0] for x in ranked]
+    ranked_plants = ranked_plants[:12]
 
     ranked = []
     if (ranked_plants == []):

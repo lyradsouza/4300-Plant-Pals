@@ -62,26 +62,6 @@ def rocchio(query, descriptions, plant_ids, relevant_descs, irrelevant_descs, a=
     ranked = sorted(id_sim_dict.items(), key = lambda x:x[1], reverse = True)
     ranked = [x[0] for x in ranked]
 
-    return ranked[:10]
+    return ranked[:12]
     
-
-
-    # ranking = []
-
-    # query = query
-    # updated_query = q1
-
-    # # update rankings for each plant decsription based on rocchio 
-    # r = np.zeros([len(input_doc_matrix)])
-    # for j in range(len(input_doc_matrix)):
-    #     r[j] = np.dot(updated_query, input_doc_matrix[j, :])
-      
-    # plant_idx = np.argsort(r)[-10:]
-    # plant_idx = np.flip(plant_idx)
-
-    # for m in plant_idx:
-    #     ranking.append(m-1)
-
-    # # returns ids of top 10 most relevant plants based on rocchio update  
-    # return ranking 
             
