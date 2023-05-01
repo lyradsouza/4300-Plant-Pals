@@ -123,9 +123,9 @@
             </div>`
         }
 
-        function descriptionBoxTemplate(commonName, description, rate) {
-            return `<button class='box' type=button onclick=loadPopUp()>
-                <h3 class='episode-title'>${commonName}</h3>
+        function descriptionBoxTemplate(commonName, description, rate, clicked) {
+            return `<button class='box' type=button onclick="loadPopUp()">
+                <h3 class='episode-title' id = "clicked">${commonName}</h3>
                 <h3 class='rating-desc'>Average User Rating of This Plant:</h3>
                 <div>${star(rate)}</div>
                 
@@ -138,48 +138,21 @@
         }
 
         function plantPopUp(commonName, description) {
-            sessionStorage.setItem('commonName', commonName)
-            sessionStorage.getItem('label', description)
+            
         }
 
         function loadPopUp() {
-            fetch("/popup?" + new URLSearchParams({ query: document.getElementById("filter-text-val").value }).toString())
-                .then((response) => window.location.href = "/popup")
+            fetch("/popup?" + new URLSearchParams({ description: document.getElementById("clicked").value }).toString())
+                .then((response) => {
+                    localStorage.setItem('description', response.name)
+                    window.location.href = "/popup"
+                })
                 // .then((data) => data.forEach(row => {
                 //     let tempDiv = document.createElement("div")
                 //     tempDiv.innerHTML = answerBoxTemplate(row.Botanical_Name, row.Flowering, row.Light, row.Temperature, row.Humidity, row.Watering, row.Soil_Mix)
                 //     document.getElementById("answer-box").appendChild(tempDiv)
                 // }));
-            
         }
-
-        // function filterText() {
-        //     document.getElementById("answer-box").innerHTML = ""
-        //     console.log(document.getElementById("filter-text-val").value)
-        //     fetch("/episodes?" + new URLSearchParams({ title: document.getElementById("filter-text-val").value }).toString())
-        //         .then((response) => response.json())
-        //         .then((data) => data.forEach(row => {
-
-        //             let tempDiv = document.createElement("div")
-        //             tempDiv.innerHTML = answerBoxTemplate(row.Botanical_Name, row.Flowering, row.Light, row.Temperature, row.Humidity, row.Watering, row.Soil_Mix)
-        //             document.getElementById("answer-box").appendChild(tempDiv)
-        //         }));
-
-        // }
-
-        // function filterText() {
-        //     document.getElementById("answer-box").innerHTML = ""
-        //     console.log(document.getElementById("filter-text-val").value)
-        //     fetch("/plants?" + new URLSearchParams({ description: document.getElementById("filter-text-val").value }).toString())
-        //         .then((response) => response.json())
-        //         .then((data) => data.forEach(row => {
-
-        //             let tempDiv = document.createElement("div")
-        //             tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description)
-        //             document.getElementById("answer-box").appendChild(tempDiv)
-        //         }));
-
-        // }
 
         function toggleRating() {
             var thumbs = document.getElementById("thumbs");
@@ -187,13 +160,12 @@
         }
 
         function filterText() {
-
             document.getElementById("answer-box").innerHTML = ""
             fetch("/plants?" + new URLSearchParams({ description: document.getElementById("filter-text-val").value }).toString())
                 .then((response) => response.json())
                 .then((data) => data.forEach(row => {
                     let tempDiv = document.createElement("div")
-                    tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description, row.rating)
+                    tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description, row.rating, false)
                     document.getElementById("answer-box").appendChild(tempDiv)
                 }));
             toggleRating()

@@ -145,9 +145,14 @@ def rocchio_search():
     return ranked
 
 
-@app.route("/popup")
+@app.route("/popup", methods=['GET'])
 def popUp():
-    query = request.args.get("query")
-    return render_template('popup.html', title=query)
+    plant_name = request.args.get("description")
+    final_name = ""
+    if plant_name != None: 
+        final_name = plant_name
+    print("QSLDKFJS:LDKFJ", plant_name)
+    # return render_template('popup.html', title=plant_name)
+    return {"name": plant_name}
 
 app.run(debug=True)

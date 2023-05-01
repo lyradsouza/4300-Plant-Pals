@@ -1,11 +1,14 @@
 <div class='pop-up'>
-  <h3 class='episode-title'>${sessionStorage.getItem("commonName")}</h3>
+  <h3 class='episode-title' id = 'description'></h3>
   <p class='episode-desc'>{{title}}</p>
   <div id="answer-box"></div>
 </div>
 
 
 <script>
+
+
+document.getElementById("description").innerHTML = localStorage.getItem("description");
 
 function filterText() {
 
