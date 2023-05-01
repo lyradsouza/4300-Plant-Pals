@@ -131,7 +131,11 @@ body {
 
 .episode-desc {
   font-family: 'Montserrat', sans-serif;
+  height: 100px;
   width: 300px;
+  white-space: pre-wrap;
+  overflow: hidden; 
+  text-overflow: ellipsis;
 }
 
 .box {
@@ -139,6 +143,7 @@ body {
   outline: 2px solid black;
   border-radius: 10px;
   margin: 5px;
+  height: 300px;
 }
 
 .submit {
