@@ -107,6 +107,7 @@ body {
 
 #answer-box {
   width: 1000px;
+
   margin-top: 50px;
 
   display: flex;
@@ -127,6 +128,7 @@ body {
   font-family: 'Kanit', sans-serif;
   width: 300px;
   font-size: 17px;
+  margin-bottom: 5px;
 }
 
 .plant-desc {
@@ -143,9 +145,10 @@ body {
 
 .box {
   padding: 10px;
-  outline: 2px solid black;
+  outline: 1.5px solid rgb(52, 52, 52);
   border-radius: 10px;
   margin: 5px;
+  padding-bottom: 20px;
 }
 
 .popup {
@@ -338,21 +341,24 @@ p {
   opacity: 1;
 }
 
-.more-info-btn{
+.more-info-btn {
+  margin-top: 10px;
   background-color: transparent;
   font-family: 'Open Sans', sans-serif;
-  border-radius:150px;
+  border-radius: 100px;
   font-weight: bold;
-  text-decoration: underline;
-  margin-top:15px;
-  height:30px;
+  padding: 5px 10px 5px 10px;
+  vertical-align: middle;
+
 }
 
-.more-info-text{
+.more-info-text {
   font-size: 12px;
+  margin: 0px;
 }
 
 .popup-box {}
+
 .popup-subhead {
   font-weight: 600 !important;
 
