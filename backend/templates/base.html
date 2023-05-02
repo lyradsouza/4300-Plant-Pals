@@ -116,6 +116,7 @@
 
         function showPopUp(commonName, description, light, temp, water) {
             let tempDivPop = document.createElement("div")
+            tempDivPop.setAttribute('id', 'popup-div')
             tempDivPop.innerHTML = ` 
                 <div id="popup-box" class="modal">
                 <div class="content" class="modal">
@@ -124,12 +125,16 @@
                 <p class='popup-desc'><span class='popup-subhead'>Optimal Lighting: </span>${light}</p>
                 <p class='popup-desc'><span class='popup-subhead'>Optimal Temperatures: </span>${temp}</p>
                 <p class='popup-desc'><span class='popup-subhead'>Optimal Watering Amount: </span>${water}</p>
-                    <button type=button class="close-box" onclick='filterText()'>
+                    <button type=button class="close-box" onclick='deletePop()'>
                         X
                     </button>
                 </div>
             </div>`
             document.getElementById("answer-box").appendChild(tempDivPop)
+        }
+
+        function deletePop() {
+            document.getElementById("answer-box").removeChild(document.getElementById("popup-div"))
         }
 
         function toggleRating() {
