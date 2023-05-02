@@ -145,7 +145,7 @@ def rocchio_search():
         return [{'commonName': "No Results Found :(", 'description': ""}]
     else:
         for i in ranked_plants:
-            ranked.append({'commonName': common_names[i], 'description': descriptions[i], 'rating': ratings[i], 'light': light[i], 'temperature': temp[i], 'watering':watering[i]})
+            ranked.append({'commonName': common_names[i], 'description': descriptions[i], 'rating': ratings[i], 'image':images[i], 'light': light[i], 'temperature': temp[i], 'watering':watering[i]})
     return ranked
 
 
