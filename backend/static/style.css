@@ -107,6 +107,7 @@ body {
 
 #answer-box {
   width: 1000px;
+
   margin-top: 50px;
 
   display: flex;
@@ -127,18 +128,34 @@ body {
   font-family: 'Kanit', sans-serif;
   width: 300px;
   font-size: 17px;
+  margin-bottom: 5px;
 }
 
-.episode-desc {
+.plant-desc {
   font-family: 'Montserrat', sans-serif;
   width: 300px;
+  /* height:100px; */
+  /* overflow: hidden; */
+}
+
+.popup-desc {
+  font-family: 'Montserrat', sans-serif;
+  /* width: 300px; */
 }
 
 .box {
   padding: 10px;
-  outline: 2px solid black;
+  outline: 1.5px solid rgb(52, 52, 52);
   border-radius: 10px;
   margin: 5px;
+  padding-bottom: 20px;
+}
+
+.popup {
+  z-index: 1 !important;
+  height: 200px;
+  width: 200px;
+  background-color: black;
 }
 
 .no-results-box {
@@ -265,3 +282,101 @@ img {
     padding:10px !;
     margin:1000px!;
 } */
+
+.pbox {
+  /* background-color: black; */
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+p {
+  font-size: 17px;
+  align-items: center;
+}
+
+.pbox a {
+  display: inline-block;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 3px;
+}
+
+.modal {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(170, 242, 233, 0.7);
+  transition: all 0.4s;
+  visibility: visible;
+  opacity: 1;
+}
+
+.content {
+  position: absolute;
+  background: white;
+  width: 500px;
+  padding: 1em 2em;
+  border-radius: 4px;
+  outline: 2px solid black;
+  border-radius: 10px;
+}
+
+.close-box {}
+
+
+.box-close {
+  position: absolute;
+  top: 0;
+  right: 15px;
+  color: #6ebd8f;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.modal:target {
+  visibility: hidden;
+  opacity: 1;
+}
+
+.more-info-btn {
+  margin-top: 10px;
+  background-color: transparent;
+  font-family: 'Open Sans', sans-serif;
+  border-radius: 100px;
+  font-weight: bold;
+  padding: 5px 10px 5px 10px;
+  vertical-align: middle;
+
+}
+
+.more-info-text {
+  font-size: 12px;
+  margin: 0px;
+}
+
+.popup-box {}
+
+.popup-subhead {
+  font-weight: 600 !important;
+
+}
+
+.close-box {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background-color: rgb(0, 0, 0, 0%);
+  border: none;
+}
+
+#popup-box {
+  position: fixed
+}

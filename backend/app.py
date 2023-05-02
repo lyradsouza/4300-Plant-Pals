@@ -16,7 +16,7 @@ os.environ['ROOT_PATH'] = os.path.abspath(os.path.join("..",os.curdir))
 # Don't worry about the deployment credentials, those are fixed
 # You can use a different DB name if you want to
 MYSQL_USER = "root"
-MYSQL_USER_PASSWORD = ""
+MYSQL_USER_PASSWORD = "MayankRao16Cornell.edu"
 MYSQL_PORT = 3306
 MYSQL_DATABASE = "plantsdb"
 
@@ -56,10 +56,26 @@ def common_desc_lists():
         image_list.append(val['Plant_Image'])
     return common_list, desc_list, rating_list, image_list
 
+def plant_care_lists():
+    query_sql = f"""SELECT * FROM plants"""
+    keys = ["Botanical_Name","Common_Name","Flowering", "Light", "Temperature", "Humidity", "Watering", "Soil_Mix"]
+    data = mysql_engine.query_selector(query_sql)
+    dict_data = [dict(zip(keys,i)) for i in data]
+    light_list = []
+    temp_list = []
+    watering_list = []
+    for val in dict_data:
+        light_list.append(val['Light'])
+        temp_list.append(val['Temperature'])
+        watering_list.append(val['Watering'])
+    return light_list, temp_list, watering_list
+
 def plants_ranked(query):
+    light, temp, watering = plant_care_lists()
     common_names, descriptions, ratings, images = common_desc_lists()
     id_list = range(len(descriptions))
 
+    id_list = range(len(descriptions))
     # ranked_plants = jaccard_similarity(id_list, descriptions, query)
     ranked_plants = cosine_similarity(query, descriptions, id_list)
     jacc_ranked_plants = jaccard_similarity(id_list, descriptions, query)
@@ -75,7 +91,7 @@ def plants_ranked(query):
         return [{'commonName': "No Results Found :(", 'description': "", 'rating':"", 'image':"static/images/sad_plant.jpg"}]
     else:
         for i in ranked_plants:
-            ranked.append({'commonName': common_names[i], 'description': descriptions[i], 'rating': ratings[i], 'image':images[i]})
+            ranked.append({'commonName': common_names[i], 'description': descriptions[i], 'rating': ratings[i], 'image':images[i], 'light': light[i], 'temperature': temp[i], 'watering':watering[i]})
     return ranked
 
 
@@ -104,6 +120,7 @@ def rocchio_search():
     relevant_list = []
     irrelevant_list = []
     common_names, descriptions, ratings, images = common_desc_lists()
+    light, temp, watering = plant_care_lists()
 
     if relevant == "True":
         for entry in ranked: 
@@ -128,7 +145,7 @@ def rocchio_search():
         return [{'commonName': "No Results Found :(", 'description': ""}]
     else:
         for i in ranked_plants:
-            ranked.append({'commonName': common_names[i], 'description': descriptions[i], 'rating': ratings[i], 'image':images[i]})
+            ranked.append({'commonName': common_names[i], 'description': descriptions[i], 'rating': ratings[i], 'light': light[i], 'temperature': temp[i], 'watering':watering[i]})
     return ranked
 
 
