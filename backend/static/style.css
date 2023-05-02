@@ -149,9 +149,9 @@ body {
 }
 
 .popup {
-  z-index: 1;
-  height:200px;
-  width:200px;
+  z-index: 1 !important;
+  height: 200px;
+  width: 200px;
   background-color: black;
 }
 
@@ -260,7 +260,7 @@ body {
 
 img {
   float: left;
-  width:  100px;
+  width: 100px;
   height: 100px;
   object-fit: cover;
   margin-right: 7px;
@@ -276,54 +276,60 @@ img {
 } */
 
 .pbox {
-    /* background-color: black; */
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  /* background-color: black; */
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 p {
-    font-size: 17px;
-    align-items: center;
+  font-size: 17px;
+  align-items: center;
 }
+
 .pbox a {
-    display: inline-block;
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 3px;
+  display: inline-block;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 3px;
 }
+
 .modal {
-    align-items: center;
-    display: flex;
-    justify-content: center; 
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(170, 242, 233, 0.7);
-    transition: all 0.4s;
-    visibility: hidden;
-    opacity: 0;
+  align-items: center !important;
+  display: flex !important;
+  justify-content: center !important;
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 100 !important;
+  background: rgba(170, 242, 233, 0.7);
+  transition: all 0.4s;
+  visibility: visible;
+  opacity: 1;
 }
+
 .content {
-    position: absolute;
-    background: white;
-    width: 500px;
-    padding: 1em 2em;
-    border-radius: 4px;
-    outline: 2px solid black;
-    border-radius: 10px;
-} 
-.modal:target {
-    visibility: visible;
-    opacity: 1;
+  position: absolute !important;
+  background: white !important;
+  width: 500px !important;
+  padding: 1em 2em !important;
+  border-radius: 4px !important;
+  outline: 2px solid black;
+  border-radius: 10px;
 }
+
+
+
 .box-close {
-    position: absolute;
-    top: 0;
-    right: 15px;
-    color:  #6ebd8f;
-    text-decoration: none;
-    font-size: 20px;
+  position: absolute;
+  top: 0;
+  right: 15px;
+  color: #6ebd8f;
+  text-decoration: none;
+  font-size: 20px;
 }
+
+.popup-box {}
