@@ -332,4 +332,9 @@ p {
   font-size: 20px;
 }
 
+.modal:target{
+  visibility: hidden;
+  opacity: 1;
+}
+
 .popup-box {}

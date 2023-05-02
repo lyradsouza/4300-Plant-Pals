@@ -164,10 +164,10 @@
                 <p class='popup-desc'>${light}</p>
                 <p class='popup-desc'>${temp}</p>
                 <p class='popup-desc'>${water}</p>
-                    <a href="#" 
-                    class="box-close" onclick="document.getElementById("answer-box").removeChild(tempDivPop)">
+                    <button type=button 
+                    class="close-box" onclick='filterText()'>
                         X
-                    </a>
+                    </button>
                 </div>
             </div>`
             document.getElementById("answer-box").appendChild(tempDivPop)
