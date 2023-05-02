@@ -25,43 +25,10 @@
                     <input placeholder="Describe your Perfect Plant Pal!" id="filter-text-val">
                 </div>
 
-                <!-- <div class="options">
-                    <div class="option">
-                        Light
-                        <div class="slidecontainer">
-                            <input type="range" min="1" max="4" value="1" class="slider" id="light_slider"
-                                onchange="updateLightInput(this.value);">
-                            <output id="light-output">1</output>
-                        </div>
-
-                    </div>
-                    <div class="option">
-                        Water
-                        <div class="slidecontainer">
-                            <input type="range" min="1" max="3" value="1" class="slider" id="water_slider"
-                                onchange="updateWaterInput(this.value);">
-                            <output id="water-output">1</output>
-                        </div>
-                    </div>
-                    <div class="option">
-                        Temperature
-                        <div class="slidecontainer">
-                            <input type="range" min="1" max="3" value="1" class="slider" id="temp_slider"
-                                onchange="updateTempInput(this.value);">
-                            <output id="temp-output">1</output>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
         <button type="button" class="submit" href="{{ url_for('static', filename='results.html') }}"
             onclick="filterText()">Click to meet your perfect plant?!</button>
-
-        <!-- <div class="pbox">
-                <a href="#popup-box"> 
-                    Click to Open Popup Box !
-                </a>
-            </div> -->
 
         <div id="answer-box">
         </div>
@@ -81,24 +48,6 @@
 
     <script>
 
-        // var env_val = document.getElementById("env").value;
-        // var light_slider_val = document.getElementById("light_slider").value;
-        // var water_slider_val = document.getElementById("water_slider").value;
-
-        // function updateEnvInputL() {
-        //     env_val = document.getElementById("env").value;
-        //     console.log(env_val)
-        // }
-
-        // function updateLightInput(val) {
-        //     document.getElementById('light-output').value = val;
-        //     light_slider_val = val;
-        // }
-        // function updateWaterInput(val) {
-        //     document.getElementById('water-output').value = val;
-        //     water_slider_val = val;
-        // }
-
         function star(rate) {
             var starHTML = '';
             var rate = parseFloat(rate);
@@ -117,8 +66,6 @@
 
             return starHTML;
         };
-
-
 
         function answerBoxTemplate(title, Flowering, Light, Temperature, Humidity, Watering, Soil_Mix) {
             return `<div class=''>
@@ -185,24 +132,6 @@
             document.getElementById("answer-box").appendChild(tempDivPop)
         }
 
-        // function popUpContent(commonName, description, light, temp, water) {
-        //     return ` 
-        //         <div id="popup-box" class="modal:target">
-        //         <div class="content">
-        //             <h3 class='episode-title'>${commonName}</h3>
-        //         <p class='popup-desc'>${description}</p>
-        //         <p class='popup-desc'>${light}</p>
-        //         <p class='popup-desc'>${temp}</p>
-        //         <p class='popup-desc'>${water}</p>
-        //             <a href="#" 
-        //             class="box-close">
-        //                 X
-        //             </a>
-        //         </div>
-        //     </div>`
-        // }
-
-
         function toggleRating() {
             var thumbs = document.getElementById("thumbs");
             thumbs.style.display = "block";
@@ -214,10 +143,6 @@
             fetch("/plants?" + new URLSearchParams({ description: document.getElementById("filter-text-val").value }).toString())
                 .then((response) => response.json())
                 .then((data) => data.forEach(row => {
-                    // let tempDiv = document.createElement("div")
-                    // tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description, row.rating, row.image, row.light, row.)
-                    // document.getElementById("answer-box").appendChild(tempDiv)
-                    // Adding PopUp to Page 
                     let tempDivPop = document.createElement("div")
                     tempDivPop.innerHTML = descriptionBoxTemplate(row.commonName, row.description, row.rating, row.image, row.light, row.temperature, row.watering)
                     document.getElementById("answer-box").appendChild(tempDivPop)
@@ -235,11 +160,6 @@
                     let tempDiv = document.createElement("div")
                     tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description, row.rating, row.image, row.light, row.temperature, row.watering)
                     document.getElementById("answer-box").appendChild(tempDiv)
-
-                    // Adding PopUp to Page 
-                    // let tempDivPop = document.createElement("div")
-                    // tempDivPop.innerHTML = popUpContent(row.commonName, row.description, row.light, row.temperature, row.watering)
-                    // document.getElementById("answer-box").appendChild(tempDivPop)
                 }));
             // get all docs that are currently being shown and add them to the relevant list
         }
@@ -253,11 +173,6 @@
                     let tempDiv = document.createElement("div")
                     tempDiv.innerHTML = descriptionBoxTemplate(row.commonName, row.description, row.rating, row.image, row.light, row.temperature, row.watering)
                     document.getElementById("answer-box").appendChild(tempDiv)
-
-                    // Adding PopUp to Page 
-                    // let tempDivPop = document.createElement("div")
-                    // tempDivPop.innerHTML = popUpContent(row.commonName, row.description)
-                    // document.getElementById("answer-box").appendChild(tempDivPop)
                 }));
         }
 
