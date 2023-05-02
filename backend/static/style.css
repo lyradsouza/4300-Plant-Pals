@@ -337,4 +337,18 @@ p {
   opacity: 1;
 }
 
+.more-info-btn{
+  background-color: transparent;
+  font-family: 'Open Sans', sans-serif;
+  border-radius:150px;
+  font-weight: bold;
+  text-decoration: underline;
+  margin-top:15px;
+  height:30px;
+}
+
+.more-info-text{
+  font-size: 12px;
+}
+
 .popup-box {}
