@@ -1,6 +1,7 @@
 <!doctype html>
 <meta charset="UTF-8">
-<title>{% block title %}{% endblock %} - Flaskr</title>
+<title>{% block title %}{% endblock %} Plant Pals</title>
+<link rel="icon" href="https://em-content.zobj.net/thumbs/240/apple/354/potted-plant_1fab4.png">
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -171,7 +172,7 @@
             tempDivPop.innerHTML = ` 
                 <div id="popup-box" class="modal">
                 <div class="content" class="modal">
-                    <h3 class='episode-title'>${commonName}</h3>
+                    <h3 class='popup-head'>${commonName}</h3>
                 <p class='popup-desc'><span class='popup-subhead'>Description: </span>${description}</p>
                 <p class='popup-desc'><span class='popup-subhead'>Optimal Lighting: </span>${light}</p>
                 <p class='popup-desc'><span class='popup-subhead'>Optimal Temperatures: </span>${temp}</p>
