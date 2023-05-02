@@ -138,23 +138,25 @@
                 display = ""
                 stars = ""
                 box = "<div class='no-results-box'>"
+                button = ""
             }
             else {
                 display = "Average User Rating of This Plant:"
                 stars = star(rate)
                 box = "<div class='box'>"
+                button = `<button type=button class='more-info-btn' id = 'desc' onclick='showPopUp(\"${commonName}\", \"${description}\", \"${light}\", \"${temp}\", \"${water}\");'}>
+                    <p class="more-info-text">Learn More</p>
+                </button>`
             }
             return `
-                <div class='box' id='clickedbox'>
+                ${box}
                 <h3 class='episode-title' id = 'name'>${commonName}</h3>
                 <img src=${image} class ='image'/>
                 <div class='rating-section'>
                     <h3 class='rating-desc'>${display}</h3>
                     <div>${stars}</div>
                 </div>
-                <button type=button class='more-info-btn' id = 'desc' onclick='showPopUp(\"${commonName}\", \"${description}\", \"${light}\", \"${temp}\", \"${water}\");'}>
-                    <p class="more-info-text">Learn More</p>
-                </button>
+                ${button}
             </div>`
 
         }
