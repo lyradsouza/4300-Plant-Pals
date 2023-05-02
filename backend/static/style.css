@@ -125,7 +125,7 @@ body {
   font-family: 'Kanit', sans-serif;
   width: 300px;
   font-size: 25px;
-  color: #6ebd8f;
+  color: #497c5e;
 }
 
 .rating-desc {
@@ -318,7 +318,7 @@ p {
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(255,255,255,0.7);
+  background: rgba(255, 255, 255, 0.7);
   transition: all 0.4s;
   visibility: visible;
   opacity: 1;
@@ -367,7 +367,7 @@ p {
 
 .popup-subhead {
   font-weight: 600 !important;
-  color: #6ebd8f;
+  color: #497c5e;
 }
 
 .close-box {

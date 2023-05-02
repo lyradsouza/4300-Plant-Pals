@@ -16,7 +16,7 @@ os.environ['ROOT_PATH'] = os.path.abspath(os.path.join("..",os.curdir))
 # Don't worry about the deployment credentials, those are fixed
 # You can use a different DB name if you want to
 MYSQL_USER = "root"
-MYSQL_USER_PASSWORD = "MayankRao16Cornell.edu"
+MYSQL_USER_PASSWORD = "chocolove"
 MYSQL_PORT = 3306
 MYSQL_DATABASE = "plantsdb"
 
@@ -49,8 +49,7 @@ def common_desc_lists():
     image_list = []
     for val in dict_data:
         common_list.append(val['Common_Name'])
-        # desc_list.append(val['Plant_Description'] + " Also known as " + val['Botanical_Name']+".")
-        desc_list.append(val['Plant_Description'])
+        desc_list.append(val['Plant_Description'] + " Also known as " + val['Botanical_Name']+".")
 
         rating_list.append(val['Rating'])
         image_list.append(val['Plant_Image'])
