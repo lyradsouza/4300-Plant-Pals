@@ -84,10 +84,11 @@ def plants_ranked(query):
 
     ranked = sorted(id_sim_dict.items(), key=lambda x:x[1], reverse=True)
     ranked_plants = [x[0] for x in ranked]
+    ranked_plants = ranked_plants[:12]
 
     ranked = []
     if (ranked_plants == []):
-        return [{'commonName': "No Results Found :(", 'description': ""}]
+        return [{'commonName': "No Results Found :(", 'description': "", 'rating':"", 'image':"static/images/sad_plant.jpg"}]
     else:
         for i in ranked_plants:
             ranked.append({'commonName': common_names[i], 'description': descriptions[i], 'rating': ratings[i], 'image':images[i], 'light': light[i], 'temperature': temp[i], 'watering':watering[i]})
@@ -120,9 +121,6 @@ def rocchio_search():
     irrelevant_list = []
     common_names, descriptions, ratings, images = common_desc_lists()
     light, temp, watering = plant_care_lists()
-
-    print("D", len(descriptions))
-    print(len(temp))
 
     if relevant == "True":
         for entry in ranked: 

@@ -158,6 +158,11 @@ body {
   background-color: black;
 }
 
+.no-results-box {
+  padding: 10px;
+  border-radius: 10px;
+}
+
 .submit {
   background-color: #6ebd8f;
   padding: 10px;

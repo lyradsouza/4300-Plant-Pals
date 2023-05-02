@@ -134,13 +134,23 @@
         function descriptionBoxTemplate(commonName, description, rate, image, light, temp, water) {
             description = description.toString().replaceAll('\"', '');
             description = description.toString().replaceAll('\'', '');
+            if (rate == "") {
+                display = ""
+                stars = ""
+                box = "<div class='no-results-box'>"
+            }
+            else {
+                display = "Average User Rating of This Plant:"
+                stars = star(rate)
+                box = "<div class='box'>"
+            }
             return `
                 <div class='box' id='clickedbox'>
                 <h3 class='episode-title' id = 'name'>${commonName}</h3>
                 <img src=${image} class ='image'/>
                 <div class='rating-section'>
-                    <h3 class='rating-desc'>Average User Rating of This Plant:</h3>
-                    <div>${star(rate)}</div>
+                    <h3 class='rating-desc'>${display}</h3>
+                    <div>${stars}</div>
                 </div>
                 <button type=button class='more-info-btn' id = 'desc' onclick='showPopUp(\"${commonName}\", \"${description}\", \"${light}\", \"${temp}\", \"${water}\");'}>
                     <p class="more-info-text">Learn More</p>
@@ -164,8 +174,7 @@
                 <p class='popup-desc'><span class='popup-subhead'>Optimal Lighting: </span>${light}</p>
                 <p class='popup-desc'><span class='popup-subhead'>Optimal Temperatures: </span>${temp}</p>
                 <p class='popup-desc'><span class='popup-subhead'>Optimal Watering Amount: </span>${water}</p>
-                    <button type=button 
-                    class="close-box" onclick='filterText()'>
+                    <button type=button class="close-box" onclick='filterText()'>
                         X
                     </button>
                 </div>
